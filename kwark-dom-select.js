@@ -58,6 +58,8 @@ select.prototype.event_decorator = function(eventName) {
     }
 }
 
+
+
 for(var i = 0; i < kwark.events.length; i++) {
     select.prototype[kwark.events[i]] = select.prototype.event_decorator(kwark.events[i]);
 }

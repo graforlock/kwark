@@ -1,7 +1,11 @@
 kwark = kwark || {};
 
 function effects(selector) {
-    select.call(this, selector);  
+    if(this instanceof effects) {
+        select.call(this, selector);  
+    } else {
+        return new effects(selector);
+    }
 }
 
 effects.prototype = Object.create(select.prototype);
