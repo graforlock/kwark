@@ -7,7 +7,6 @@ function ajax(url) {
             status,
             value;
 
-
         function resolve(result) {
             value = result;
             state = result.readyState;
@@ -18,16 +17,27 @@ function ajax(url) {
             }
         }
 
-        function handle(onResolved) {
-            if(state < 4 || status !== 200) {
-                deferred = onResolved;
+        function handle(resolvers) {
+            if(state < 4) {
+                deferred = resolvers;
                 return;
             } 
-            onResolved(value.responseText)
+
+            var handler;
+            if(status === 200) {
+                handler = resolvers.resolved;
+            }
+            if(String(status).match(/^([4-5][0-5][0-9])$/g)){
+                handler = resolvers.rejected;
+            }
+            handler(value.responseText)
         }
         
-        this.then = function(resolved) {
-            handle(resolved);
+        this.then = function(resolved, rejected) {
+            handle({
+                resolved: resolved, 
+                rejected: rejected
+            });
         }
         
         var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
