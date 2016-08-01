@@ -1,28 +1,37 @@
 kwark = kwark || {};
 
-function ajax(options) {
+function ajax(url) {
+    var state = 0,
+        deferred,
+        value;
+    
+    function resolve(result) {
+        value = result;
+        state = result.readyState;
+
+        if(deferred) {
+            handle(deferred);
+        }
+    }
+
+    function handle(onResolved) {
+        if( state !== 4) {
+            deferred = onResolved;
+        }
+        onResolved(value.responseText)
+    }
+    
+    this.then = function(resolved) {
+        handle(resolved);
+    }
+
     var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) return xhttp.responseText;
+        resolve(xhttp);
     };
-    if(options.method === 'get') {
-        xhttp.open("GET", options.url, true);
-        xhttp.send();
-    }
-    if(options.method === 'post') {
-        xhttp.open("POST", options.url, true);
-        xhttp.send();
-    }
-}
+    xhttp.open("GET", url, true);
+    xhttp.send();
 
-function get(options) {
-    return kwark.promise({method: 'get'})
-}
-
-function post(options) {
-    return kwark.promise({method: 'post'})
 }
 
 kwark.ajax = ajax;
-kwark.post = post;
-kwark.get = get;
