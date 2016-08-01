@@ -3,8 +3,8 @@ kwark = kwark || {};
 function ajax(url) {
     if(this instanceof ajax) {
         var state = 0,
-            status = 0,
             deferred,
+            status,
             value;
         
         function resolve(result) {
@@ -18,10 +18,14 @@ function ajax(url) {
         }
 
         function handle(onResolved) {
-            if( state !== 4 && status !== 200) {
+            if(state !== 4 || status !== 200) {
                 deferred = onResolved;
-            }
+                return;
+            } 
+
             onResolved(value.responseText)
+
+
         }
         
         this.then = function(resolved) {
