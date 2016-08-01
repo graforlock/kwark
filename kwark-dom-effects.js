@@ -31,7 +31,7 @@ effects.prototype.fadeIn = function(target) {
 
 effects.prototype.fadeOut = function(target) {
     target = target || 0.0;
-    opacity = parseFloat(this.node.style.opacity) || 1.00;
+    opacity = parseFloat(this.node.style.opacity) || 1.0;
     var self = this;
     (function frame() {
         if(opacity <= target) {

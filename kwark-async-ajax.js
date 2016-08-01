@@ -6,7 +6,8 @@ function ajax(url) {
             deferred,
             status,
             value;
-        
+
+
         function resolve(result) {
             value = result;
             state = result.readyState;
@@ -18,20 +19,17 @@ function ajax(url) {
         }
 
         function handle(onResolved) {
-            if(state !== 4 || status !== 200) {
+            if(state < 4 || status !== 200) {
                 deferred = onResolved;
                 return;
             } 
-
             onResolved(value.responseText)
-
-
         }
         
         this.then = function(resolved) {
             handle(resolved);
         }
-
+        
         var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         xhttp.onreadystatechange = function() {
             resolve(xhttp);
