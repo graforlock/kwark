@@ -28,7 +28,7 @@ function select(selector) {
     }
 };
 
-select.one = function(selector) {
+select.first = function(selector) {
     select = new select();
     select.node = document.querySelector(selector); 
     return select;
