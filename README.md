@@ -8,6 +8,7 @@
 
 ```
 var filteredData = kwark.compose(filterById, parseJson)
+
 kwark.ajax('get' url).then(filteredData)
 ```
 
