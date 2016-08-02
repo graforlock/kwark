@@ -6,8 +6,10 @@
 
 ### example use:
 
-`var filteredData = kwark.compose(filterById, parseJson)`
-`kwark.ajax('get' url).then(filteredData)`
+```
+var filteredData = kwark.compose(filterById, parseJson)
+kwark.ajax('get' url).then(filteredData)
+```
 
 ## kwark:async:ajax
 
