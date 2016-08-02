@@ -28,7 +28,7 @@ function select(selector) {
 };
 
 select.prototype.find = function(selector) {
-    var selected = this.node.selectuerySelector(selector);
+    var selected = this.node.querySelector(selector);
     if(selected) this.node = selected; 
     else console.log('select: ' + selector + ' is empty.');
     return this;
