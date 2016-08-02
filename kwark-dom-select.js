@@ -29,9 +29,9 @@ function select(selector) {
 };
 
 select.one = function(selector) {
-    select = new select();
-    select.node = document.querySelector(selector); 
-    return select;
+    _s = new select();
+    _s.node = document.querySelector(selector); 
+    return _s;
 }
 
 select.prototype.find = function(selector, all) {
@@ -40,6 +40,7 @@ select.prototype.find = function(selector, all) {
     else console.log('select: ' + selector + ' is empty.');
     return this;
 };
+
 select.prototype.isntNull = function() {
         return this['node'] !== null;
 };

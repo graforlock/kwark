@@ -8,4 +8,3 @@ kwark.compose = function() {
         }, value);
     }
 }
-
