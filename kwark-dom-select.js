@@ -81,9 +81,11 @@ select.prototype.type = function(node) {
 select.prototype.each = function(f) {
         var type = {}.toString;
         if (this.type(this['node']) === '[object HTMLCollection]' || this.type(this['node']) === '[object NodeList]' ) {
-            return this.foreach(this['node'], f);
+            this.foreach(this['node'], f);
+            return this;
         } else {
-            return f(this['node']);
+            f(this['node']);
+            return this;
         }
     };
 
