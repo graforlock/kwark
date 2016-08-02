@@ -15,8 +15,7 @@ component.prototype.name = select;
 component.prototype.ajax = function(url) {
     kwark.ajax(url)
         .then(function(data) {
-            var _compare = data;
-            if(_compare !== this.state) {
+            if(data !== this.state) {
                 this.state = data;
                 this.notify();
             }
