@@ -28,20 +28,20 @@ function select(selector) {
     }
 };
 
-select.first = function(selector) {
+select.one = function(selector) {
     select = new select();
     select.node = document.querySelector(selector); 
     return select;
 }
 
-select.prototype.find = function(selector) {
-    var selected = this.node.querySelector(selector);
+select.prototype.find = function(selector, all) {
+    var selected = all ? this.node.querySelectorAll(selector) : this.node.querySelector(selector);
     if(selected) this.node = selected; 
     else console.log('select: ' + selector + ' is empty.');
     return this;
 };
 select.prototype.isntNull = function() {
-        return this['node'] != null;
+        return this['node'] !== null;
 };
 select.prototype.event = function(ev, f) {
     f = f.bind(this);
@@ -66,7 +66,6 @@ select.prototype.event_decorator = function(eventName) {
 }
 
 
-
 for(var i = 0; i < kwark.events.length; i++) {
     select.prototype[kwark.events[i]] = select.prototype.event_decorator(kwark.events[i]);
 }
@@ -88,6 +87,7 @@ select.prototype.each = function(f) {
     };
 
 select.prototype.html = function(html) {
+    if(!html) return this.node.innerHTML;
     this.each(function(e) {
         e.innerHTML = html;
     });

@@ -46,4 +46,6 @@ effects.prototype.fadeOut = function(target) {
     
 }
 
+effects.prototype.move = function(direction, velocity) {}
+
 kwark.effects = effects;
