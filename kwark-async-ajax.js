@@ -25,12 +25,12 @@ function ajax(url) {
 
             var handler;
             if(status === 200) {
-                handler = resolvers.resolved;
+                resolvers.resolved(xhttp.responseText);
             }
             if(String(status).match(/^([4-5][0-5][0-9])$/g)){
-                handler = resolvers.rejected;
+                resolvers.rejected({statusText: xhttp.statusText, statusCode: status});
             }
-            handler(value.responseText)
+
         }
         
         this.then = function(resolved, rejected) {
