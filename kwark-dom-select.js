@@ -13,6 +13,17 @@ kwark.events = [
 ]
 // <config/>
 
+/*
+TODO
+-------
+addClass
+removeClass
+hasClass
+siblings
+children
+-------
+*/
+
 function select(selector) {
     if(this instanceof select) {
         if(!selector) return;

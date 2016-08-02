@@ -4,8 +4,10 @@ function component(selector, controller) {
     select.call(this, selector);
     this._controller = controller;
     this.controller = function(state) {
+        var ready;
         this._controller.bind(this);
-        this._controller(state);
+        ready = this._controller(state);
+        if(ready) this.render(ready);
     }
 }
 
@@ -25,5 +27,6 @@ component.prototype.ajax = function(url) {
 component.prototype.notify = function() {
     this.controller(this.state);
 }
+
 
 kwark.component = component;
