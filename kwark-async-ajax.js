@@ -1,6 +1,6 @@
 kwark = kwark || {};
 
-function ajax(url) {
+function ajax(method, url) {
     if(this instanceof ajax) {
         var state = 0,
             deferred,
@@ -44,8 +44,10 @@ function ajax(url) {
         xhttp.onreadystatechange = function() {
             resolve(xhttp);
         };
-        xhttp.open("GET", url, true);
-        xhttp.send();
+        if(method.toLowerCase() === 'get') {
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
 
     } else {
         return new ajax(url);
