@@ -15,6 +15,7 @@ kwark.events = [
 
 function select(selector) {
     if(this instanceof select) {
+        if(!selector) return;
         if(selector.indexOf('.') !== -1) {
             this['node'] = document.getElementsByClassName(selector.split('.').join(''));
         } else if(selector.indexOf('#') !== -1) {
@@ -26,6 +27,12 @@ function select(selector) {
         return new select(selector);
     }
 };
+
+select.one = function(selector) {
+    select = new select();
+    select.node = document.querySelector(selector); 
+    return select;
+}
 
 select.prototype.find = function(selector) {
     var selected = this.node.querySelector(selector);
