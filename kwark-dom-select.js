@@ -16,9 +16,6 @@ kwark.events = [
 /*
 TODO
 -------
-addClass
-removeClass
-hasClass
 siblings
 children
 -------
@@ -51,6 +48,36 @@ select.prototype.find = function(selector, all) {
     else console.log('select: ' + selector + ' is empty.');
     return this;
 };
+
+select.prototype.addClass = function(className){
+  if(this.node.className.indexOf(className) === -1) {
+    this.node.className += (this.node.className ? ' ' : '') + className;
+  }
+  return this;
+};
+
+select.prototype.hasClass = function(className) {
+    if(new RegExp(className, 'g').exec(this.node.className)) return this;
+    return false;
+};
+
+select.prototype.removeClass =  function(className) {
+    if(this.hasClass(className)) this.node.className = this.node.className.replace(className, '');
+    return this;
+};
+
+select.prototype.nSiblings =  function() {
+   var siblings = [], n = this.node;
+   while(n = n.nextElementSibling) siblings.push(n);
+   this.node = siblings;
+   return this; 
+}
+select.prototype.pSiblings =  function() {
+   var siblings = [], n = this.node;
+   while(n = n.previousElementSibling) siblings.push(n);
+   this.node = siblings;
+   return this; 
+}
 
 select.prototype.isntNull = function() {
         return this['node'] !== null;
