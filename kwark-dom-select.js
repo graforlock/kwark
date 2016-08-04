@@ -16,8 +16,8 @@ kwark.events = [
 /*
 TODO
 -------
-siblings
-children
+append
+prepend
 -------
 */
 
@@ -79,6 +79,19 @@ select.prototype.pSiblings =  function() {
    return this; 
 }
 
+select.prototype.children = function(filter) {
+    if(!filter) {
+        return this.node = this.node.children; 
+    } else {
+        this.node = [].slice.call(this.node.children).filter(filter);
+    }
+    return this;
+}
+
+select.prototype.append = function() {}
+
+select.prototype.prepend = function() {}
+
 select.prototype.isntNull = function() {
         return this['node'] !== null;
 };
@@ -118,7 +131,7 @@ select.prototype.type = function(node) {
 };
 select.prototype.each = function(f) {
         var type = {}.toString;
-        if (this.type(this['node']) === '[object HTMLCollection]' || this.type(this['node']) === '[object NodeList]' ) {
+        if (this.type() === '[object HTMLCollection]' || this.type() === '[object NodeList]' || this.type() === '[object Array]') {
             this.foreach(this['node'], f);
             return this;
         } else {
@@ -126,6 +139,8 @@ select.prototype.each = function(f) {
             return this;
         }
     };
+
+select.prototype.inline = function(inlined) {}
 
 select.prototype.html = function(html) {
     if(!html) return this.node.innerHTML;
