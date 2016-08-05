@@ -16,8 +16,6 @@ kwark.events = [
 /*
 TODOs
 -------
-append
-prepend
 insertAfter
 insertBefore
 -------
