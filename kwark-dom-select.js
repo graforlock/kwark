@@ -132,9 +132,17 @@ select.prototype.children = function(filter) {
     return this;
 }
 
-select.prototype.append = function() {}
+select.prototype.append = function(target) {
+    target = target || document.body;
+    target.appendChild(this.node);
+    return this;1
+}
 
-select.prototype.prepend = function() {}
+select.prototype.prepend = function(target) {
+    var target = target || document.body;
+    target.insertBefore(this.node, target.children[0]);
+    return this;
+}
 
 select.prototype.isntNull = function() {
         return this['node'] !== null;
