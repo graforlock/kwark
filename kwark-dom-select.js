@@ -14,12 +14,16 @@ kwark.events = [
 // <config/>
 
 /*
-TODO
+TODOs
 -------
 append
 prepend
+insertAfter
+insertBefore
 -------
 */
+
+/* { CONSTRUCTOR } */
 
 function select(selector) {
     if(this instanceof select) {
@@ -36,10 +40,18 @@ function select(selector) {
     }
 };
 
+/* { CLASS METHODS } */
+
 select.one = function(selector) {
     _s = new select();
     _s.node = document.querySelector(selector); 
     return _s;
+}
+
+select.inline = function(content) {
+    _i = new select();
+    _i.inlined = content;
+    return _i;
 }
 
 select.prototype.find = function(selector, all) {
@@ -65,6 +77,38 @@ select.prototype.removeClass =  function(className) {
     if(this.hasClass(className)) this.node.className = this.node.className.replace(className, '');
     return this;
 };
+
+select.prototype.nodeify = function(target) {
+    var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]+)<\/[a-z]+>$/g,
+    node = reg.exec(this.inlined);
+    var inner = node[2];
+    var tags = node[1].split(" ");
+    var headTag = tags[0];
+    this.node = document.createElement(headTag);
+    var self = this;
+
+    if(tags.length > 1) {
+
+        tags.slice(1)
+            .map(function(attr) { 
+                var obj = {},
+                    attrs = attr.split('='); 
+                obj[attrs[0]] = attrs[1];
+                return obj;
+            }).forEach(function(attr) {
+                var keys = Object.keys(attr),
+                    key = keys[0];
+                    if(attr[key]) {
+                        value = attr[key].indexOf('"') !== -1 ? attr[key].replace(/"/g, '') : attr[key];
+                    }
+                self.node[key] = value ? value : "";
+            });
+
+    }
+
+    this.html(inner);
+    return this;
+}
 
 select.prototype.nSiblings =  function() {
    var siblings = [], n = this.node;
@@ -139,8 +183,6 @@ select.prototype.each = function(f) {
             return this;
         }
     };
-
-select.prototype.inline = function(inlined) {}
 
 select.prototype.html = function(html) {
     if(!html) return this.node.innerHTML;
