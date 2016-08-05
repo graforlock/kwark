@@ -130,23 +130,25 @@ select.prototype.children = function(filter) {
         this.node = [].slice.call(this.node.children).filter(filter);
     }
     return this;
-}
+};
 
 select.prototype.append = function(target) {
     target = target || document.body;
     target.appendChild(this.node);
-    return this;1
-}
+    return this;
+};
 
 select.prototype.prepend = function(target) {
     var target = target || document.body;
-    target.insertBefore(this.node, target.children[0]);
+    if(target.children) target.insertBefore(this.node, target.children[0]);
+    else target.appendChild(this.node);
     return this;
-}
+};
 
 select.prototype.isntNull = function() {
         return this['node'] !== null;
 };
+
 select.prototype.event = function(ev, f) {
     f = f.bind(this);
     var cachedProp = this.node;
@@ -167,7 +169,7 @@ select.prototype.event_decorator = function(eventName) {
                 });
         }
     }
-}
+};
 
 
 for(var i = 0; i < kwark.events.length; i++) {
