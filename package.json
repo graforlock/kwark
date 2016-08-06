@@ -1,0 +1,19 @@
+{
+  "name": "kwark",
+  "version": "1.0.0",
+  "description": "lightweight DOM manipulation library",
+  "main": "dist/kwark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graforlock/kwark.git"
+  },
+  "author": "Maciej Sitko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graforlock/kwark/issues"
+  },
+  "homepage": "https://github.com/graforlock/kwark#readme"
+}

@@ -121,6 +121,18 @@ select.prototype.pSiblings =  function() {
    return this; 
 }
 
+select.prototype.eq = function(index) {
+    return this.node[index];
+}
+
+select.prototype.first = function() {
+    return this.node[0];
+}
+
+select.prototype.last = function() {
+    return this.node[this.node.length - 1];
+}
+
 select.prototype.children = function(filter) {
     if(!filter) {
         return this.node = this.node.children; 
