@@ -4,7 +4,7 @@
   "description": "lightweight DOM manipulation library",
   "main": "dist/kwark.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./node_modules/.bin/gulp scripts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/graforlock/kwark/issues"
   },
-  "homepage": "https://github.com/graforlock/kwark#readme"
+  "homepage": "https://github.com/graforlock/kwark#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^2.0.0"
+  }
 }
