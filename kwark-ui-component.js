@@ -7,7 +7,7 @@ function component(selector, controller) {
         var ready;
         this._controller.bind(this);
         ready = this._controller(state);
-        if(ready) this.render(ready);
+        if(ready && ready !== this.state) this.render(ready);
     }
 }
 
