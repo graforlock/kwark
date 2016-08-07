@@ -3,11 +3,11 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify');
 
 var orderedDeps = [ 
-        './kwark-core.js',
-        './kwark-dom-select.js',
-        './kwark-dom-effects.js',
-        './kwark-async-ajax.js',
-        './kwark-ui-component.js',
+        './src/kwark-core.js',
+        './src/kwark-dom-select.js',
+        './src/kwark-dom-effects.js',
+        './src/kwark-async-ajax.js',
+        './src/kwark-ui-component.js',
      ];
 
 gulp.task('scripts', function() {
