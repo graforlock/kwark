@@ -57,24 +57,25 @@ select.prototype.find = function(selector, all) {
     if(selected) this.node = selected; 
     else console.log('select: ' + selector + ' is empty.');
     return this;
-};
+}
 
 select.prototype.addClass = function(className){
   if(this.node.className.indexOf(className) === -1) {
     this.node.className += (this.node.className ? ' ' : '') + className;
   }
   return this;
-};
+}
 
 select.prototype.hasClass = function(className) {
     if(new RegExp(className, 'g').exec(this.node.className)) return this;
     return false;
-};
+}
 
 select.prototype.removeClass =  function(className) {
     if(this.hasClass(className)) this.node.className = this.node.className.replace(className, '');
     return this;
-};
+}
+
 
 select.prototype.nodeify = function(target) {
     var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]+)<\/[a-z]+>$/g,
@@ -108,17 +109,11 @@ select.prototype.nodeify = function(target) {
     return this;
 }
 
-select.prototype.nSiblings =  function() {
-   var siblings = [], n = this.node;
-   while(n = n.nextElementSibling) siblings.push(n);
-   this.node = siblings;
-   return this; 
-}
-select.prototype.pSiblings =  function() {
-   var siblings = [], n = this.node;
-   while(n = n.previousElementSibling) siblings.push(n);
-   this.node = siblings;
-   return this; 
+select.prototype.siblings = function() {
+    var prev = kwark.pSiblings(this.node) || [],
+        next = kwark.nSiblings(this.node) || [];
+    this.node = prev.concat(next);
+    return this;
 }
 
 select.prototype.eq = function(index) {
