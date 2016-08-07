@@ -1,5 +1,3 @@
-kwark = kwark || {};
-
 function component(selector, controller) {
     select.call(this, selector);
     this._controller = controller;
@@ -29,4 +27,4 @@ component.prototype.notify = function() {
 }
 
 
-kwark.component = component;
+module.exports = component;

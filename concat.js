@@ -1,3 +1,133 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+function ajax(url) {
+    if(this instanceof ajax) {
+        var state = 0,
+            deferred,
+            status,
+            value;
+
+        function resolve(result) {
+            value = result;
+            state = result.readyState;
+            status = result.status;
+
+            if(deferred) {
+                handle(deferred);
+            }
+        }
+
+        function handle(resolvers) {
+            if(state < 4) {
+                deferred = resolvers;
+                return;
+            } 
+
+            var handler;
+            if(status === 200) {
+                resolvers.resolved(xhttp.responseText);
+            }
+            if(String(status).match(/^([4-5][0-5][0-9])$/g)){
+                resolvers.rejected({statusText: xhttp.statusText, statusCode: status});
+            }
+
+        }
+        
+        this.then = function(resolved, rejected) {
+            handle({
+                resolved: resolved, 
+                rejected: rejected
+            });
+        }
+        
+        var xhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xhttp.onreadystatechange = function() {
+            resolve(xhttp);
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+
+
+    } else {
+        return new ajax(url);
+    }
+
+}
+
+module.exports = ajax;
+
+},{}],2:[function(require,module,exports){
+exports.compose = function() {
+    var funcs = [].slice.call(arguments).reverse();
+    return function(value) {
+        return funcs.reduce(function(v,f) {
+            return f(v);
+        }, value);
+    }
+}
+
+exports.pSiblings =  function(target) {
+   var siblings = [], n = target;
+   while(n = n.previousElementSibling) siblings.push(n);
+   return siblings;
+}
+
+exports.nSiblings =  function(target) {
+   var siblings = [], n = target;
+   while(n = n.nextElementSibling) siblings.push(n);
+   return siblings;
+}
+
+},{}],3:[function(require,module,exports){
+function effects(selector) {
+    if(this instanceof effects) {
+        select.call(this, selector);  
+    } else {
+        return new effects(selector);
+    }
+}
+
+effects.prototype = Object.create(select.prototype);
+effects.prototype.name = select;
+
+effects.prototype.frame_decorator = function() {}
+
+effects.prototype.fadeIn = function(target) {
+    target = target || 1.0;
+    opacity = parseFloat(this.node.style.opacity) || 0.00;
+    var self = this;
+    (function frame() {
+        if(opacity >= target) {
+            self.node.style.opacity = target;
+            return;
+        } else {
+            opacity += 0.01
+            self.node.style.opacity = opacity;
+            window.requestAnimationFrame(frame);
+        }
+    })();
+}
+
+effects.prototype.fadeOut = function(target) {
+    target = target || 0.0;
+    opacity = parseFloat(this.node.style.opacity) || 1.0;
+    var self = this;
+    (function frame() {
+        if(opacity <= target) {
+            self.node.style.opacity = target;
+            return;
+        } else {
+            opacity -= 0.01
+            self.node.style.opacity = opacity;
+            window.requestAnimationFrame(frame);
+        }
+    })();
+    
+}
+
+effects.prototype.move = function(direction, velocity) {}
+
+module.exports = effects;
+},{}],4:[function(require,module,exports){
 // <config>
 kwark.events = [
      'mousedown',
@@ -212,3 +342,35 @@ select.prototype.interval = function(f,time,infinite) {
     interval(f,time);
 };
 module.exports = select;
+},{}],5:[function(require,module,exports){
+function component(selector, controller) {
+    select.call(this, selector);
+    this._controller = controller;
+    this.controller = function(state) {
+        var ready;
+        this._controller.bind(this);
+        ready = this._controller(state);
+        if(ready && ready !== this.state) this.render(ready);
+    }
+}
+
+component.prototype = Object.create(select.prototype);
+component.prototype.name = select;
+
+component.prototype.ajax = function(url) {
+    kwark.ajax(url)
+        .then(function(data) {
+            if(data !== this.state) {
+                this.state = data;
+                this.notify();
+            }
+        }.bind(this));
+}
+
+component.prototype.notify = function() {
+    this.controller(this.state);
+}
+
+
+module.exports = component;
+},{}]},{},[1,2,3,4,5]);

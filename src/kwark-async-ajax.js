@@ -1,5 +1,3 @@
-kwark = kwark || {};
-
 function ajax(url) {
     if(this instanceof ajax) {
         var state = 0,
@@ -54,4 +52,4 @@ function ajax(url) {
 
 }
 
-kwark.ajax = ajax;
+module.exports = ajax;

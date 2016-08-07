@@ -1,5 +1,3 @@
-kwark = kwark || {};
-
 function effects(selector) {
     if(this instanceof effects) {
         select.call(this, selector);  
@@ -48,4 +46,4 @@ effects.prototype.fadeOut = function(target) {
 
 effects.prototype.move = function(direction, velocity) {}
 
-kwark.effects = effects;
+module.exports = effects;

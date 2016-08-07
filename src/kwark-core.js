@@ -1,6 +1,4 @@
-kwark = kwark || {};
-
-kwark.compose = function() {
+exports.compose = function() {
     var funcs = [].slice.call(arguments).reverse();
     return function(value) {
         return funcs.reduce(function(v,f) {
@@ -9,13 +7,13 @@ kwark.compose = function() {
     }
 }
 
-kwark.pSiblings =  function(target) {
+exports.pSiblings =  function(target) {
    var siblings = [], n = target;
    while(n = n.previousElementSibling) siblings.push(n);
    return siblings;
 }
 
-kwark.nSiblings =  function(target) {
+exports.nSiblings =  function(target) {
    var siblings = [], n = target;
    while(n = n.nextElementSibling) siblings.push(n);
    return siblings;
