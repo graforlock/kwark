@@ -4,7 +4,8 @@
   "description": "lightweight DOM manipulation library",
   "main": "dist/kwark.js",
   "scripts": {
-    "build": "./node_modules/.bin/gulp scripts"
+    "build": "./node_modules/.bin/gulp scripts",
+    "test": "./node_modules/.bin/browserify tests/*.js | node_modules/.bin/tape-run"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,11 @@
   },
   "homepage": "https://github.com/graforlock/kwark#readme",
   "devDependencies": {
+    "browserify": "^13.1.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "gulp-uglify": "^2.0.0"
+    "gulp-uglify": "^2.0.0",
+    "tape": "^4.6.0",
+    "tape-run": "^2.1.4"
   }
 }
