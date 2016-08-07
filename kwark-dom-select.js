@@ -79,10 +79,10 @@ select.prototype.removeClass =  function(className) {
 
 select.prototype.nodeify = function(target) {
     var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]+)<\/[a-z]+>$/g,
-    node = reg.exec(this.inlined);
-    var inner = node[2];
-    var tags = node[1].split(" ");
-    var headTag = tags[0];
+        node = reg.exec(this.inlined);
+    var inner = node[2],
+        tags = node[1].split(" "),
+        headTag = tags[0];
     this.node = document.createElement(headTag);
     var self = this;
 
@@ -144,7 +144,7 @@ select.prototype.append = function(target) {
 };
 
 select.prototype.prepend = function(target) {
-    var target = target || document.body;
+    target = target || document.body;
     if(target.children) target.insertBefore(this.node, target.children[0]);
     else target.appendChild(this.node);
     return this;
