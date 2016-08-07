@@ -109,10 +109,10 @@ select.prototype.nodeify = function(target) {
     return this;
 }
 
-select.prototype.siblings = function() {
+select.prototype.siblings = function(filter) {
     var prev = kwark.pSiblings(this.node) || [],
         next = kwark.nSiblings(this.node) || [];
-    this.node = prev.concat(next);
+    this.node = filter ? [].filter.call(prev.concat(next), filter) : prev.concat(next);
     return this;
 }
 
