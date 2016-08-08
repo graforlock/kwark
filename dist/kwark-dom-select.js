@@ -1,4 +1,5 @@
 // <config>
+var kwark = {};
 kwark.events = ['mousedown', 'mouseover', 'mouseup', 'click', 'resize', 'scroll', 'keypress', 'keyup', 'keydown'];
 // <config/>
 
