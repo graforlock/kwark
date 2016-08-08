@@ -1,3 +1,5 @@
+var select = require('./kwark-dom-select');
+
 function effects(selector) {
     if(this instanceof effects) {
         select.call(this, selector);  
@@ -18,7 +20,7 @@ effects.prototype.fadeIn = function(target) {
     (function frame() {
         if(opacity >= target) {
             self.node.style.opacity = target;
-            return;
+            return self;
         } else {
             opacity += 0.01
             self.node.style.opacity = opacity;
@@ -34,7 +36,7 @@ effects.prototype.fadeOut = function(target) {
     (function frame() {
         if(opacity <= target) {
             self.node.style.opacity = target;
-            return;
+            return self;
         } else {
             opacity -= 0.01
             self.node.style.opacity = opacity;
@@ -45,3 +47,5 @@ effects.prototype.fadeOut = function(target) {
 }
 
 effects.prototype.move = function(direction, velocity) {}
+
+module.exports = effects;

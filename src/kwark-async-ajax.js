@@ -52,3 +52,4 @@ function ajax(url) {
 
 }
 
+module.exports = ajax;

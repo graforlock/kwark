@@ -19,6 +19,19 @@ var core = {
         var siblings = [], n = target;
         while(n = n.nextElementSibling) siblings.push(n);
         return siblings;
-    }
+    },
+    events : [
+        'mousedown',
+        'mouseover', 
+        'mouseup', 
+        'click', 
+        'resize', 
+        'scroll',
+        'keypress',
+        'keyup',
+        'keydown'
+   ]
 
 }
+
+module.exports = core;

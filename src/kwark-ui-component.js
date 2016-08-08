@@ -1,3 +1,5 @@
+var select = require('./kwark-dom-select');
+
 function component(selector, controller) {
     select.call(this, selector);
     this._controller = controller;
@@ -25,3 +27,5 @@ component.prototype.ajax = function(url) {
 component.prototype.notify = function() {
     this.controller(this.state);
 }
+
+module.exports = component;

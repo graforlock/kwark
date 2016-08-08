@@ -1,17 +1,5 @@
-// <config>
-var config = {};
-config.events = [
-     'mousedown',
-     'mouseover', 
-     'mouseup', 
-     'click', 
-     'resize', 
-     'scroll',
-     'keypress',
-     'keyup',
-     'keydown'
-]
-// <config/>
+var core = require('./kwark-core'),
+    events = core.events;
 
 /*
 TODOs
@@ -177,8 +165,8 @@ select.prototype.event_decorator = function(eventName) {
 };
 
 
-for(var i = 0; i < config.events.length; i++) {
-    select.prototype[config.events[i]] = select.prototype.event_decorator(config.events[i]);
+for(var i = 0; i < events.length; i++) {
+    select.prototype[events[i]] = select.prototype.event_decorator(events[i]);
 }
 
 select.prototype.foreach = function(list, f) {
@@ -212,3 +200,5 @@ select.prototype.interval = function(f,time,infinite) {
     var interval = (infinite  || false) ? setInterval : setTimeout;
     interval(f,time);
 };
+
+module.exports = select;
