@@ -19,8 +19,8 @@ test('some test', function(t) {
         t.end();
     }
 
-    var testSuites = compose(assertContent, assertObject);
-    var composed = compose(testSuites, toJSON);
+    var testSuites = compose(assertContent, assertObject),
+        composed = compose(testSuites, toJSON);
 
     result = ajax('http://jsonplaceholder.typicode.com/posts/1')
         .then(composed);
