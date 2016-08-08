@@ -72,7 +72,6 @@ select.prototype.nodeify = function(target) {
     var self = this;
 
     if(tags.length > 1) {
-
         var attributes = tags.slice(1)
             .map(function(attr) { 
                 var obj = {},
@@ -80,7 +79,6 @@ select.prototype.nodeify = function(target) {
                 obj[attrs[0]] = attrs[1];
                 return obj;
             });
-
         for(var i = 0; i < attributes.length; i++) {
             var keys = Object.keys(attributes[i]),
                 key = keys[0],
