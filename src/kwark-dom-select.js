@@ -29,13 +29,13 @@ function select(selector) {
 /* { CLASS METHODS } */
 
 select.one = function(selector) {
-    _s = new select();
+    var _s = new select();
     _s.node = document.querySelector(selector); 
     return _s;
 }
 
 select.inline = function(content) {
-    _i = new select();
+    var _i = new select();
     _i.inlined = content;
     return _i;
 }
@@ -84,7 +84,8 @@ select.prototype.nodeify = function(target) {
                 return obj;
             }).forEach(function(attr) {
                 var keys = Object.keys(attr),
-                    key = keys[0];
+                    key = keys[0],
+                    value;
                     if(attr[key]) {
                         value = attr[key].indexOf('"') !== -1 ? attr[key].replace(/"/g, '') : attr[key];
                     }
@@ -92,8 +93,7 @@ select.prototype.nodeify = function(target) {
             });
 
     }
-
-    this.html(inner);
+    if(inner) this.html(inner);
     return this;
 }
 
