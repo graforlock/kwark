@@ -9,7 +9,6 @@ insertBefore
 -------
 */
 
-/* { CONSTRUCTOR } */
 
 function select(selector) {
     if(this instanceof select) {
@@ -24,9 +23,7 @@ function select(selector) {
     } else {
         return new select(selector);
     }
-};
-
-/* { CLASS METHODS } */
+}
 
 select.one = function(selector) {
     var _s = new select();
@@ -76,21 +73,23 @@ select.prototype.nodeify = function(target) {
 
     if(tags.length > 1) {
 
-        tags.slice(1)
+        var attributes = tags.slice(1)
             .map(function(attr) { 
                 var obj = {},
                     attrs = attr.split('='); 
                 obj[attrs[0]] = attrs[1];
                 return obj;
-            }).forEach(function(attr) {
-                var keys = Object.keys(attr),
-                    key = keys[0],
-                    value;
-                    if(attr[key]) {
-                        value = attr[key].indexOf('"') !== -1 ? attr[key].replace(/"/g, '') : attr[key];
-                    }
-                self.node[key] = value ? value : "";
             });
+
+        for(var i = 0; i < attributes.length; i++) {
+            var keys = Object.keys(attributes[i]),
+                key = keys[0],
+                value;
+            if(attributes[i][key]) {
+                value = attributes[i][key].indexOf('"') !== -1 ? attributes[i][key].replace(/"/g, '') : attributes[i][key];
+            }
+            self.node[key] = value ? value : "";
+        }
 
     }
     if(inner) this.html(inner);
