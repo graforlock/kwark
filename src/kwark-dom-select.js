@@ -1,5 +1,6 @@
 // <config>
-kwark.events = [
+var config = {};
+config.events = [
      'mousedown',
      'mouseover', 
      'mouseup', 
@@ -109,8 +110,8 @@ select.prototype.nodeify = function(target) {
 }
 
 select.prototype.siblings = function(filter) {
-    var prev = kwark.pSiblings(this.node) || [],
-        next = kwark.nSiblings(this.node) || [];
+    var prev = core.pSiblings(this.node) || [],
+        next = core.nSiblings(this.node) || [];
     this.node = filter ? [].filter.call(prev.concat(next), filter) : prev.concat(next);
     return this;
 }
@@ -176,8 +177,8 @@ select.prototype.event_decorator = function(eventName) {
 };
 
 
-for(var i = 0; i < kwark.events.length; i++) {
-    select.prototype[kwark.events[i]] = select.prototype.event_decorator(kwark.events[i]);
+for(var i = 0; i < config.events.length; i++) {
+    select.prototype[config.events[i]] = select.prototype.event_decorator(config.events[i]);
 }
 
 select.prototype.foreach = function(list, f) {
@@ -211,4 +212,3 @@ select.prototype.interval = function(f,time,infinite) {
     var interval = (infinite  || false) ? setInterval : setTimeout;
     interval(f,time);
 };
-module.exports = select;

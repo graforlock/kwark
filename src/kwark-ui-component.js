@@ -25,6 +25,3 @@ component.prototype.ajax = function(url) {
 component.prototype.notify = function() {
     this.controller(this.state);
 }
-
-
-module.exports = component;

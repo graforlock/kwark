@@ -13,7 +13,7 @@ effects.prototype.frame_decorator = function() {}
 
 effects.prototype.fadeIn = function(target) {
     target = target || 1.0;
-    opacity = parseFloat(this.node.style.opacity) || 0.00;
+    var opacity = parseFloat(this.node.style.opacity) || 0.00;
     var self = this;
     (function frame() {
         if(opacity >= target) {
@@ -29,7 +29,7 @@ effects.prototype.fadeIn = function(target) {
 
 effects.prototype.fadeOut = function(target) {
     target = target || 0.0;
-    opacity = parseFloat(this.node.style.opacity) || 1.0;
+    var opacity = parseFloat(this.node.style.opacity) || 1.0;
     var self = this;
     (function frame() {
         if(opacity <= target) {
@@ -45,5 +45,3 @@ effects.prototype.fadeOut = function(target) {
 }
 
 effects.prototype.move = function(direction, velocity) {}
-
-module.exports = effects;
