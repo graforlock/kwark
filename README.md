@@ -13,7 +13,9 @@ Utilities, and standalone functions that make the core of kwark.
 ### compose
 
 Functional composition utility.
+
 ---
+
 #### example use:
 
 ```
@@ -33,6 +35,7 @@ A simple promise-based implementation of ajax module.
 Generalised ajax method, supports basic GET and POST requests.
 
 ---
+
 #### example use:
 
 ```
