@@ -2,17 +2,17 @@ var select = require('../src/kwark-dom-select'),
     effects = require('../src/kwark-dom-select'),
     test = require('tape');
 
-test('Nodeify element and click it', function(t) { 
+test('Clone, Nodeify element and Click it', function(t) { 
     t.plan(3);
 
-    var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify();
-    var paragraph = clicky.clone().find('p');
+    var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify(),
+        paragraph = clicky.clone().find('p');
     
-    t.notEqual(paragraph.node, clicky.node);
-    t.equal(clicky.node.id, 'sample-id', '-> Id assigned properly to the node.');
+    t.notEqual(paragraph.node, clicky.node, '-> Cloned should are not the same.');
+    t.equal(clicky.node.id, 'sample-id', '-> Id attribute is parsed properly (to the node).');
 
     clicky.click(function(ev) {
-        t.equal(clicky.type(ev), '[object MouseEvent]', '-> Event is of type MouseEvent.');
+        t.equal(clicky.type(ev), '[object MouseEvent]', '-> Event is of correct type: MouseEvent.');
         t.end();
     });
 
