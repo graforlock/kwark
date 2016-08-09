@@ -17,9 +17,11 @@ Functional composition utility.
 #### example use:
 
 ```
-var filteredData = kwark.compose(filterById, parseJson)
+var filteredData = kwark
+    .compose(filterById, parseJson);
 
-kwark.ajax('get' url).then(filteredData)
+kwark.ajax('get' url)
+    .then(filteredData);
 ```
 
 ## kwark:async:ajax
@@ -34,7 +36,7 @@ Generalised ajax method, supports basic GET and POST requests.
 
 ```
 kwark.ajax('get', url)
-    .then(resolve, reject)
+    .then(resolve, reject);
 ```
 -  where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely.
 - Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
