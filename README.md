@@ -12,14 +12,14 @@ Utilities, and standalone functions that make the core of kwark.
 
 ### compose
 
-Functional composition utility.
+Functional composition utility (reversed pipeline).
 #### example use:
 
 ```javascript
-var filteredData = core
+var filteredData = kwark
     .compose(filterById, parseJson);
 
-ajax('get' url)
+kwark.ajax('get' url)
     .then(filteredData);
 ```
 
@@ -33,7 +33,7 @@ Generalised ajax method, supports basic GET and POST requests.
 #### example use:
 
 ```javascript
-ajax('get', url)
+kwark.ajax('get', url)
     .then(resolve, reject);
 ```
 -  where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely.
