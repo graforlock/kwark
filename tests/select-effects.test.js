@@ -3,10 +3,13 @@ var select = require('../src/kwark-dom-select'),
     test = require('tape');
 
 test('Nodeify element and click it', function(t) { 
-    t.plan(2);
+    t.plan(3);
 
-    var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify().find('p');
-    t.equal(typeof clicky.node, 'object', '-> Nodeified element is of type object.');
+    var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify();
+    var paragraph = clicky.clone().find('p');
+    
+    t.notEqual(paragraph.node, clicky.node);
+    t.equal(clicky.node.id, 'sample-id', '-> Id assigned properly to the node.');
 
     clicky.click(function(ev) {
         t.equal(clicky.type(ev), '[object MouseEvent]', '-> Event is of type MouseEvent.');

@@ -94,6 +94,13 @@ select.prototype.nodeify = function(target) {
     return this;
 }
 
+select.prototype.clone = function() {
+    var cloned = this.node.cloneNode(true),
+        newObj = core.extend({}, this);
+    newObj.node = cloned;
+    return newObj;
+}
+
 select.prototype.siblings = function(filter) {
     var prev = core.pSiblings(this.node) || [],
         next = core.nSiblings(this.node) || [];
