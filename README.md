@@ -15,7 +15,7 @@ Utilities, and standalone functions that make the core of kwark.
 Functional composition utility.
 #### example use:
 
-```
+```javascript
 var filteredData = kwark
     .compose(filterById, parseJson);
 
@@ -32,7 +32,7 @@ A simple promise-based implementation of ajax module.
 Generalised ajax method, supports basic GET and POST requests.
 #### example use:
 
-```
+```javascript
 kwark.ajax('get', url)
     .then(resolve, reject);
 ```
