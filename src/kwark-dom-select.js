@@ -138,11 +138,21 @@ select.prototype.append = function(target) {
 select.prototype.insertBefore = function(target) {
     target = target || false;
     if(target) {
-        var parent = this.node.parentNode;
+        var parent = target.parentNode;
         parent.insertBefore(this.node, target);
     }
     return this;
 
+}
+
+select.prototype.insertAfter = function(target) {
+    target = target.nextElementSibling || false;
+    if(target) {
+        var parent = target.parentNode;
+        console.log(parent);
+        parent.insertBefore(this.node, target);
+    }
+    return this;
 }
 
 select.prototype.prepend = function(target) {

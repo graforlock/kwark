@@ -41,5 +41,3 @@ test('All siblings selected after insertAfter', function(t) {
 
 
 })
-
-test.onFinish
