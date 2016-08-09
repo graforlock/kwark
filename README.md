@@ -10,7 +10,7 @@ Pre-build effects and animations that extend the standard select library.
 
 Utilities, and standalone functions that make the core of kwark.
 
-### example use:
+#### example use:
 
 ```
 var filteredData = kwark.compose(filterById, parseJson)
@@ -22,7 +22,7 @@ kwark.ajax('get' url).then(filteredData)
 
 A simple promise-based implementation of ajax module.  
 
-### example use:
+#### example use:
 
 ```kwark.ajax('get', url).then(resolve, reject)```
 -  where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely.
