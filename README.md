@@ -1,8 +1,14 @@
 ## kwark:dom:select
 
+A minimalistic selector library.
+
 ## kwark:dom:effects
 
+Pre-build effects and animations that extend the standard select library.
+
 ## kwark:core:utils
+
+Utilities, and standalone functions that make the core of kwark.
 
 ### example use:
 
@@ -13,6 +19,8 @@ kwark.ajax('get' url).then(filteredData)
 ```
 
 ## kwark:async:ajax
+
+A simple promise-based implementation of ajax module.  
 
 ### example use:
 
