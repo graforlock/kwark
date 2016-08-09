@@ -16,10 +16,10 @@ Functional composition utility.
 #### example use:
 
 ```javascript
-var filteredData = kwark
+var filteredData = core
     .compose(filterById, parseJson);
 
-kwark.ajax('get' url)
+ajax('get' url)
     .then(filteredData);
 ```
 
@@ -33,7 +33,7 @@ Generalised ajax method, supports basic GET and POST requests.
 #### example use:
 
 ```javascript
-kwark.ajax('get', url)
+ajax('get', url)
     .then(resolve, reject);
 ```
 -  where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely.
