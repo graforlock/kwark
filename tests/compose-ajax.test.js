@@ -2,7 +2,7 @@ var test = require('tape'),
     ajax = require('../src/kwark-async-ajax.js'),
     compose = require('../src/kwark-core.js').compose;
 
-test('some test', function(t) {
+test('Ajax and compose test', function(t) {
     t.plan(2);
 
     function toJSON(response) {
@@ -10,12 +10,12 @@ test('some test', function(t) {
     }
 
     function assertObject(response) {
-        t.equal(typeof response, 'object');
+        t.equal(typeof response, 'object', '-> JSON data successfully fetched and parsed.');
         return response;
     }
 
     function assertContent(response) {
-        t.equal(typeof response.id, 'number');
+        t.equal(typeof response.id, 'number', '-> JSON data has correct structure and numeric type id.');
         t.end();
     }
 

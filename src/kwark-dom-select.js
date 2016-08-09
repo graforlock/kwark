@@ -97,7 +97,7 @@ select.prototype.nodeify = function(target) {
 select.prototype.siblings = function(filter) {
     var prev = core.pSiblings(this.node) || [],
         next = core.nSiblings(this.node) || [];
-    this.node = filter ? [].filter.call(prev.concat(next), filter) : prev.concat(next);
+    this.node = filter ? prev.concat(next).filter(filter) : prev.concat(next);
     return this;
 }
 
@@ -127,6 +127,16 @@ select.prototype.append = function(target) {
     target.appendChild(this.node);
     return this;
 };
+
+select.prototype.insertBefore = function(target) {
+    target = target || false;
+    if(target) {
+        var parent = this.node.parentNode;
+        parent.insertBefore(this.node, target);
+    }
+    return this;
+
+}
 
 select.prototype.prepend = function(target) {
     target = target || document.body;
