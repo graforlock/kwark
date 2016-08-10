@@ -2,7 +2,7 @@
 
 A minimalistic selector library.
 
-### insertBefore
+### insertBefore( node )
 
 Insert `select`ed node before the element passed in as an argument.
 
@@ -14,7 +14,7 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
-### insertAfter
+### insertAfter( node )
 
 Insert `select`ed node after the element passed in as an argument.
 
@@ -33,7 +33,7 @@ Pre-build effects and animations that extend the standard select library.
 
 Utilities, and standalone functions that make the core of kwark.
 
-### partial
+### partial( fn, [ ...arguments ])
 
 Partial application. Function will fire as soon as it gets enough arguments.
 
@@ -54,7 +54,7 @@ partialAddThree(1,2)(3);
 
 ```
 
-### compose
+### compose( ...functions )
 
 Functional composition utility (reversed pipeline).
 #### example use:
@@ -68,7 +68,7 @@ kwark.ajax('get' url)
 ```
 
 
-### contains
+### contains( item, array )
 
 Checks whether array contains the given item.
 
@@ -77,7 +77,7 @@ kwark.contains(1,[1,2,3]);
 // true
 ```
 
-### extend
+### extend( destination, source )
 
 Extends javascript object(s). With ES2015 in mind, rather use native `Object.assign()` method, or spread operator `{ ...object}`.
 
@@ -86,7 +86,7 @@ Extends javascript object(s). With ES2015 in mind, rather use native `Object.ass
 
 A simple promise-based implementation of ajax module.  
 
-### ajax
+### ajax( method, url )
 
 Generalised ajax method, supports basic GET and POST requests.
 #### example use:
