@@ -2,7 +2,7 @@ var test = require('tape'),
     ajax = require('../src/kwark-async-ajax.js'),
     compose = require('../src/kwark-core-utils.js').compose;
 
-test('Ajax and compose test', function(t) {
+test('Ajax and functional compososition test.', function(t) {
     t.plan(2);
 
     function toJSON(response) {

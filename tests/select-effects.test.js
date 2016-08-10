@@ -2,7 +2,7 @@ var select = require('../src/kwark-dom-select'),
     effects = require('../src/kwark-dom-select'),
     test = require('tape');
 
-test('Clone, Nodeify element and Click it', function(t) { 
+test('Clone, Nodeify element and Click event.', function(t) { 
     t.plan(3);
 
     var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify(),
@@ -20,11 +20,12 @@ test('Clone, Nodeify element and Click it', function(t) {
 
 })
 
-test('All siblings selected after insertAfter', function(t) {
+test('Siblings and insertAfter functiionality.', function(t) {
     t.plan(2);
     
     var len = 4,
         id4;
+        
     for(var i = 0; i < len; i++) {
         var div = document.createElement('div');
         div.id = 'id-' + (i + 1);
