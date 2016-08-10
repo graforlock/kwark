@@ -2,6 +2,23 @@
 
 A minimalistic selector library.
 
+### insertBefore
+
+```javascript
+const div = select.inline('<div><p>contents</p></div>').nodeify();
+
+div
+    .insertBefore(document.querySelector('#nodey'));
+```
+
+### insertAfter
+
+```javascript
+div
+    .clone()
+    .insertAfter(document.querySelector('#nodey'));
+```
+
 ## kwark:dom:effects
 
 Pre-build effects and animations that extend the standard select library.
