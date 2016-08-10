@@ -1,14 +1,5 @@
-var core = require('./kwark-core'),
+var core = require('./kwark-core-utils'),
     events = core.events;
-
-/*
-TODOs
--------
-insertAfter
-insertBefore
--------
-*/
-
 
 function select(selector) {
     if(this instanceof select) {
