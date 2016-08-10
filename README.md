@@ -6,7 +6,7 @@ A minimalistic selector library.
 
 Insert `select`ed node before the element passed in as an argument.
 
-#### example use:
+#### example:
 ```javascript
 const div = select.inline('<div><p>contents</p></div>').nodeify();
 
@@ -18,7 +18,7 @@ div
 
 Insert `select`ed node after the element passed in as an argument.
 
-#### example use:
+#### example:
 ```javascript
 div
     .clone()
@@ -37,7 +37,7 @@ Utilities, and standalone functions that make the core of kwark.
 
 Partial application. Function will fire as soon as it gets enough arguments.
 
-#### example use:
+#### example:
 
 ```javascript
 var addThree = function(a,b,c) {
@@ -57,7 +57,7 @@ partialAddThree(1,2)(3);
 ### compose( ...functions )
 
 Functional composition utility (reversed pipeline).
-#### example use:
+#### example:
 
 ```javascript
 var filteredData = kwark
@@ -89,7 +89,7 @@ A simple promise-based implementation of ajax module.
 ### ajax( method, url )
 
 Generalised ajax method, supports basic GET and POST requests.
-#### example use:
+#### example:
 
 ```javascript
 kwark.ajax('get', url)
