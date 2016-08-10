@@ -8,29 +8,11 @@ var core = {
             }, value);
         }
     },
-
-    pSiblings : function(target) {
-        var siblings = [], n = target;
-        while(n = n.previousElementSibling) siblings.push(n);
-        return siblings;
+    contains: function(item,array) {
+        for(var i = 0; i < array.length; i++) if(item === array[i]) return true;
+        
+        return false;
     },
-
-    nSiblings : function(target) {
-        var siblings = [], n = target;
-        while(n = n.nextElementSibling) siblings.push(n);
-        return siblings;
-    },
-    events : [
-        'mousedown',
-        'mouseover', 
-        'mouseup', 
-        'click', 
-        'resize', 
-        'scroll',
-        'keypress',
-        'keyup',
-        'keydown'
-   ],
    extend: function(destination, source) {
         for (var property in source) {
             if (source[property] && source[property].constructor &&
@@ -43,11 +25,43 @@ var core = {
         }
         return destination;
     },
-    contains: function(item,array) {
-        for(var i = 0; i < array.length; i++) if(item === array[i]) return true;
-        
-        return false;
-    }
+    events : [
+        'mousedown',
+        'mouseover', 
+        'mouseup', 
+        'click', 
+        'resize', 
+        'scroll',
+        'keypress',
+        'keyup',
+        'keydown'
+   ],
+    nSiblings : function(target) {
+        var siblings = [], n = target;
+        while(n = n.nextElementSibling) siblings.push(n);
+        return siblings;
+    },
+    partial: function(fn) {
+        var arity = fn.length;
+
+        return getArgs([]);
+
+        function getArgs(totalArgs) {
+            return function stepTwo() {
+                var nextTotalArgs = totalArgs.concat([].slice.call(arguments, 0));
+                if (nextTotalArgs.length >= arity)
+                    return fn.apply(this, nextTotalArgs);
+                else
+                    return getArgs(nextTotalArgs);
+
+            }
+        }
+    },
+    pSiblings : function(target) {
+        var siblings = [], n = target;
+        while(n = n.previousElementSibling) siblings.push(n);
+        return siblings;
+    },
 
 }
 
