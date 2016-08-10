@@ -61,7 +61,7 @@ var core = {
         var siblings = [], n = target;
         while(n = n.previousElementSibling) siblings.push(n);
         return siblings;
-    },
+    }
 
 }
 
