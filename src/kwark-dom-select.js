@@ -140,7 +140,6 @@ select.prototype.insertAfter = function(target) {
     target = target.nextElementSibling || false;
     if(target) {
         var parent = target.parentNode;
-        console.log(parent);
         parent.insertBefore(this.node, target);
     }
     return this;
