@@ -1,4 +1,4 @@
-# kwark:dom:select
+## kwark:dom:select
 
 A minimalistic selector library.
 
@@ -25,11 +25,11 @@ div
     .insertAfter(document.querySelector('#nodey'));
 ```
 
-# kwark:dom:effects
+## kwark:dom:effects
 
 Pre-build effects and animations that extend the standard select library.
 
-# kwark:core:utils
+## kwark:core:utils
 
 Utilities, and standalone functions that make the core of kwark.
 
@@ -97,7 +97,7 @@ All siblings preceding the target node.
 kwark.pSiblings(document.querySelector('#nodey'));
 ```
 
-# kwark:async:ajax
+## kwark:async:ajax
 
 A simple promise-based implementation of ajax module.  
 
