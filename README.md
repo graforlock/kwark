@@ -101,14 +101,11 @@ kwark.pSiblings(document.querySelector('#nodey'));
 
 A simple promise-based implementation of ajax module.  
 
-### ajax( method, url )
+### ajax( method, url ).then( resolve, reject )
 
-Generalised ajax method, supports basic GET and POST requests.
-
+Generalised ajax method, supports basic GET and POST requests. where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely. Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
 
 ```javascript
 kwark.ajax('get', url)
     .then(resolve, reject);
 ```
--  where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely.
-- Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
