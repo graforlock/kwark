@@ -51,7 +51,6 @@ partialAddThree(1)(2);
 
 partialAddThree(1,2)(3);
 // 6
-
 ```
 
 ### compose( ...functions )
@@ -103,10 +102,8 @@ kwark.pSiblings(document.querySelector('#nodey'));
 Serializes form node which is then ready to be sent as a request.
 
 ```javascript
-
 var formNode = select('#form').node,
     serialized = addons.serialize(formNode);
-
 ```
 
 ### xmlToJson( XML )
