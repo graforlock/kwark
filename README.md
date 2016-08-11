@@ -2,7 +2,7 @@
 
 A minimalistic selector library.
 
-### insertBefore( target )
+### insertBefore( targetNode )
 
 Insert `select`ed node before the element passed in as an argument.
 
@@ -14,7 +14,7 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
-### insertAfter( target )
+### insertAfter( targetNode )
 
 Insert `select`ed node after the element passed in as an argument.
 
@@ -81,7 +81,7 @@ kwark.contains(1,[1,2,3]);
 
 Extends javascript object(s). With ES2015 in mind, rather use native `Object.assign()` method, or spread operator `{ ...object}`.
 
-### nSiblings( target )
+### nSiblings( targetNode )
 
 All siblings following the target node.
 
@@ -89,12 +89,19 @@ All siblings following the target node.
 kwark.nSiblings(document.querySelector('#nodey'));
 ```
 
-### pSiblings( target )
+### pSiblings( targetNode )
 
 All siblings preceding the target node.
 
 ```javascript
 kwark.pSiblings(document.querySelector('#nodey'));
+```
+## kwark:dom:addons
+
+### serialize( targetNode )
+
+```javascript
+
 ```
 
 ## kwark:async:ajax
