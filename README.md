@@ -100,8 +100,32 @@ kwark.pSiblings(document.querySelector('#nodey'));
 
 ### serialize( targetNode )
 
+Serializes form node which is then ready to be sent as a request.
+
 ```javascript
 
+var formNode = select('#form').node,
+    serialized = addons.serialize(formNode);
+
+```
+
+### xmlToJson( XML )
+
+Parses xml file and returns a valid JSON object out of it.
+
+```javascript
+// (...) some request with xmlresponse
+
+var JSON = addons.xmlToJson(xmlresponse);
+
+```
+
+### loadScript( urlSource, [ callback ] )
+
+Fetches and loads the script from external url. The script itself is cleaned up from DOM after being loaded.
+
+```javascript
+addons.loadScript('https://somefancyfancysite.co.uk/script.js');
 ```
 
 ## kwark:async:ajax

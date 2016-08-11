@@ -56,7 +56,7 @@ var addons = {
         }
         return obj;
     },
-    getScript: function(source, callback) {
+    loadScript: function(source, callback) {
         var script = document.createElement('script');
         var prior = document.getElementsByTagName('script')[0];
         script.async = 1;
