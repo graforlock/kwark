@@ -111,6 +111,11 @@ select.prototype.last = function() {
     return this.node[this.node.length - 1];
 }
 
+select.prototype.where = function(filter) {
+    this.node = [].filter.call(this.node, filter);
+    return this;
+}
+
 select.prototype.children = function(filter) {
     if(!filter) {
         return this.node = this.node.children; 
