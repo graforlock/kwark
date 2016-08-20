@@ -2,3 +2,4 @@
 .babelrc
 app
 node_modules
+bundle
