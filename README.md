@@ -1,5 +1,3 @@
-![Alt text](./kwark.svg)
-
 ## kwark:dom:select
 
 A minimalistic selector library.
