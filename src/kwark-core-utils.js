@@ -1,5 +1,19 @@
 var core = {
+    maybe: function(v) {
+        if(v === null || typeof v === 'undefined' || !isNaN(v) ) return new core.none(v);
 
+        return new core.just(v);
+    },
+    just: function(v) {
+        this._ = v;
+        this.join = function() {
+            return this._;
+        }.bind(this)
+
+    },
+    none: function(v) {
+        this._ = v;
+    },
     compose : function() {
         var funcs = [].slice.call(arguments).reverse();
         return function(value) {

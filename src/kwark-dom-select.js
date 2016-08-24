@@ -28,6 +28,15 @@ select.inline = function(content) {
     return _i;
 }
 
+select.prototype = {
+    set node(v) {
+        this._ = new core.maybe(v);
+    },
+    get node() {
+        if(this._.constructor.name === 'just') return this._.join();
+    }
+}
+
 select.prototype.find = function(selector, all) {
     var selected = all ? this.node.querySelectorAll(selector) : this.node.querySelector(selector);
     if(selected) this.node = selected; 
