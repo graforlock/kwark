@@ -1,4 +1,4 @@
-![Alt text](kwark.svg)
+![Alt text](./kwark.svg)
 
 ## kwark:dom:select
 
