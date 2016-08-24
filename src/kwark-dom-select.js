@@ -28,6 +28,12 @@ select.inline = function(content) {
     return _i;
 }
 
+select.get = function(content) {
+    var _i = new select();
+    _i.node = content;
+    return _i;
+}
+
 select.prototype = {
     set node(v) {
         this._ = new core.maybe(v);

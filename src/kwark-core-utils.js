@@ -1,7 +1,6 @@
 var core = {
     maybe: function(v) {
         if(v === null || typeof v === 'undefined' || !isNaN(v) ) return new core.none(v);
-
         return new core.just(v);
     },
     just: function(v) {
@@ -9,7 +8,6 @@ var core = {
         this.join = function() {
             return this._;
         }.bind(this)
-
     },
     none: function(v) {
         this._ = v;
@@ -23,8 +21,7 @@ var core = {
         }
     },
     contains: function(item,array) {
-        for(var i = 0; i < array.length; i++) if(item === array[i]) return true;
-        
+        for(var i = 0; i < array.length; i++) if(item === array[i]) return true;  
         return false;
     },
    extend: function(destination, source) {

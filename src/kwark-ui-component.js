@@ -2,30 +2,22 @@ var select = require('./kwark-dom-select');
 
 function component(selector, controller) {
     select.call(this, selector);
-    this._controller = controller;
+    this._controller = controller.bind(this);
     this.controller = function(state) {
         var ready;
-        this._controller.bind(this);
         ready = this._controller(state);
-        if(ready && ready !== this.state) this.render(ready);
-    }
+        if(ready && JSON.stringify(ready) !== JSON.stringify(this.state)) {
+            this.state = ready;
+            if(this.render) this.render(ready);
+        }
+    }.bind(this);
 }
 
 component.prototype = Object.create(select.prototype);
 component.prototype.name = select;
 
-component.prototype.ajax = function(url) {
-    kwark.ajax(url)
-        .then(function(data) {
-            if(data !== this.state) {
-                this.state = data;
-                this.notify();
-            }
-        }.bind(this));
-}
-
-component.prototype.notify = function() {
-    this.controller(this.state);
-}
+component.inline = select.inline;
+component.one = select.one;
+component.get = select.get;
 
 module.exports = component;

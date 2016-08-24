@@ -24,6 +24,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-uglify": "^2.0.0",
     "tape": "^4.6.0",
-    "tape-run": "^2.1.4"
+    "tape-run": "^2.1.4",
+    "virtual-dom": "^2.1.1"
   }
 }
