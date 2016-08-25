@@ -16,8 +16,6 @@ function component(selector, controller) {
 component.prototype = Object.create(select.prototype);
 component.prototype.name = select;
 
-component.inline = select.inline;
-component.one = select.one;
-component.get = select.get;
+select.statics_decorator(component);
 
 module.exports = component;

@@ -47,6 +47,11 @@ var core = {
         'keyup',
         'keydown'
    ],
+   statics : [
+       'one',
+       'inline',
+       'get'
+   ],
     nSiblings : function(target) {
         var siblings = [], n = target;
         while(n = n.nextElementSibling) siblings.push(n);
@@ -73,7 +78,6 @@ var core = {
         while(n = n.previousElementSibling) siblings.push(n);
         return siblings;
     }
-
 }
 
 module.exports = core;

@@ -11,6 +11,8 @@ function effects(selector) {
 effects.prototype = Object.create(select.prototype);
 effects.prototype.name = select;
 
+select.statics_decorator(effects);
+
 effects.prototype.frame_decorator = function() {}
 
 effects.prototype.fadeIn = function(target) {

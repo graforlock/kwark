@@ -34,6 +34,12 @@ select.get = function(content) {
     return _i;
 }
 
+select.statics_decorator = function(target) {
+        for(var i = 0; i < core.statics.length; i++) {
+                target[core.statics[i]] = select[core.statics[i]];
+    }
+}
+
 select.prototype = {
     set node(v) {
         this._ = new core.maybe(v);
@@ -69,9 +75,9 @@ select.prototype.removeClass =  function(className) {
 
 
 select.prototype.nodeify = function(target) {
-    var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]+)<\/[a-z]+>$/g,
+    var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]*)<\/[a-z]+>$/g,
         node = reg.exec(this.inlined);
-    var inner = node[2],
+    var inner = new core.maybe(node[2]),
         tags = node[1].split(" "),
         headTag = tags[0];
     this.node = document.createElement(headTag);
@@ -96,7 +102,7 @@ select.prototype.nodeify = function(target) {
         }
 
     }
-    if(inner) this.html(inner);
+    if(inner.constructor.name !== 'none') this.html(inner.join());
     return this;
 }
 
@@ -197,7 +203,6 @@ select.prototype.event_decorator = function(eventName) {
         }
     }
 };
-
 
 for(var i = 0; i < events.length; i++) {
     select.prototype[events[i]] = select.prototype.event_decorator(events[i]);
