@@ -16,7 +16,7 @@ function dummyController() {
         ]
 }
 
-test('rendered succesfully', function(t) {
+test('Render function redners Virtual DOM tree succesfully', function(t) {
     t.plan(1);
     var a = new component.inline('<div></div>').nodeify().append();
     a.render = function() {
@@ -27,6 +27,6 @@ test('rendered succesfully', function(t) {
                 parent = component.get(rootNode);
                 parent.append(this.node);
     }
-    t.equal(typeof document.querySelector('#some-id'), 'object');
+    t.equal(typeof document.querySelector('#some-id'), 'object', '-> Rendered content with #some-id');
     t.end();
 });

@@ -47,7 +47,7 @@ var addThree = function(a,b,c) {
 var partialAddThree = kwark.partial(addThree);
 
 partialAddThree(1)(2);
-// nothing happens
+// nothing happens, waiting for the third arg
 
 partialAddThree(1,2)(3);
 // 6

@@ -179,7 +179,7 @@ select.prototype.prepend = function(target) {
 };
 
 select.prototype.isntNull = function() {
-        return this['node'] !== null;
+        return this['node'].constructor.name !== 'none';
 };
 
 select.prototype.event = function(ev, f) {

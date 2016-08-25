@@ -8,7 +8,7 @@ test('Clone, Nodeify element and Click event.', function(t) {
     var clicky = select.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify(),
         paragraph = clicky.clone().find('p');
     
-    t.notEqual(paragraph.node, clicky.node, '-> Cloned should are not the same.');
+    t.notEqual(paragraph.node, clicky.node, '-> Cloned nodes should not be the same.');
     t.equal(clicky.node.id, 'sample-id', '-> Id attribute is parsed properly (to the node).');
 
     clicky.click(function(ev) {
