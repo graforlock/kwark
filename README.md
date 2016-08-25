@@ -51,6 +51,10 @@ partialAddThree(1)(2);
 
 partialAddThree(1,2)(3);
 // 6
+partialAddThree(1)(2,3);
+// 6
+partialAddThree(1)(2)(3);
+// 6
 ```
 
 ### compose( ...functions )
