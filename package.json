@@ -1,6 +1,6 @@
 {
   "name": "kwark",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "lightweight DOM manipulation library",
   "main": "dist/kwark.js",
   "scripts": {
