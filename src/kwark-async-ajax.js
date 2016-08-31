@@ -1,5 +1,8 @@
-function ajax(url) {
+var serialize = require('./kwark-core-addons').serialize.object;
+
+function ajax(method, options) {
     if(this instanceof ajax) {
+        params = serialize(options.params) || null;
         var state = 0,
             deferred,
             status,
@@ -42,12 +45,11 @@ function ajax(url) {
         xhttp.onreadystatechange = function() {
             resolve(xhttp);
         };
-        xhttp.open("GET", url, true);
-        xhttp.send();
-
+        xhttp.open(method.toUpperCase(), options.url, true);
+        xhttp.send(params);
 
     } else {
-        return new ajax(url);
+        return new ajax(options.url);
     }
 
 }

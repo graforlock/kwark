@@ -1,24 +1,33 @@
 var addons = {
-
-      serialize: function(form) {
-        var field, s = [];
-        if (typeof form == 'object' && form.nodeName == "FORM") {
-            var len = form.elements.length;
-            for (i=0; i<len; i++) {
-                field = form.elements[i];
-                if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
-                    if (field.type == 'select-multiple') {
-                        for (j=form.elements[i].options.length-1; j>=0; j--) {
-                            if(field.options[j].selected)
-                                s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[j].value);
+    serialize: {
+        form: function(form) {
+            var field, s = [];
+            if (typeof form == 'object' && form.nodeName == "FORM") {
+                var len = form.elements.length;
+                for (i=0; i<len; i++) {
+                    field = form.elements[i];
+                    if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
+                        if (field.type == 'select-multiple') {
+                            for (j=form.elements[i].options.length-1; j>=0; j--) {
+                                if(field.options[j].selected)
+                                    s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[j].value);
+                            }
+                        } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
+                            s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value);
                         }
-                    } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
-                        s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value);
                     }
                 }
             }
+            return s.join('&').replace(/%20/g, '+');
+        },
+        object: function(obj) {
+            var str = [];
+            for(var p in obj)
+                if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+            return str.join("&");
         }
-        return s.join('&').replace(/%20/g, '+');
     },
     xmlToJson: function(xml){
         // Create the return object
