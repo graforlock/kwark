@@ -22,7 +22,7 @@ test('Ajax and functional compososition test.', function(t) {
     var testSuites = compose(assertContent, assertObject),
         composed = compose(testSuites, toJSON);
 
-    result = ajax('http://jsonplaceholder.typicode.com/posts/1')
+    result = ajax('get', {url: 'http://jsonplaceholder.typicode.com/posts/1'})
         .then(composed);
 
 })

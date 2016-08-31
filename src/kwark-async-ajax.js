@@ -2,7 +2,7 @@ var serialize = require('./kwark-core-addons').serialize.object;
 
 function ajax(method, options) {
     if(this instanceof ajax) {
-        params = serialize(options.params) || null;
+        var params = options.params ? serialize(options.params) : null;
         var state = 0,
             deferred,
             status,
@@ -25,12 +25,13 @@ function ajax(method, options) {
             } 
 
             var handler;
-            if(status === 200) {
-                resolvers.resolved(xhttp.responseText);
-            }
-            if(String(status).match(/^([4-5][0-5][0-9])$/g)){
-                resolvers.rejected({statusText: xhttp.statusText, statusCode: status});
-            }
+            if(status >= 200 ) {
+                if(status >= 300) {
+                    resolvers.rejected({statusText: xhttp.statusText, statusCode: status});
+                } else {
+                    resolvers.resolved(xhttp.responseText);
+                }
+            } 
 
         }
         
@@ -46,10 +47,11 @@ function ajax(method, options) {
             resolve(xhttp);
         };
         xhttp.open(method.toUpperCase(), options.url, true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(params);
 
     } else {
-        return new ajax(options.url);
+        return new ajax(method, options);
     }
 
 }
