@@ -20,6 +20,9 @@ var core = {
             }, value);
         }
     },
+    compareTo: function(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    },
     contains: function(item,array) {
         for(var i = 0; i < array.length; i++) if(item === array[i]) return true;  
         return false;
@@ -78,6 +81,6 @@ var core = {
         while(n = n.previousElementSibling) siblings.push(n);
         return siblings;
     }
-}
+};
 
 module.exports = core;

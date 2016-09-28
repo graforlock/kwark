@@ -1,4 +1,5 @@
 var select = require('./kwark-dom-select');
+var kefir = require('kefir');
 
 function component(selector, controller) {
     select.call(this, selector);
@@ -17,5 +18,9 @@ component.prototype = Object.create(select.prototype);
 component.prototype.name = select;
 
 select.statics_decorator(component);
+
+component.prototype.subscribe = function(stream) {
+    stream.onValue(this.render);
+};
 
 module.exports = component;

@@ -26,5 +26,8 @@
     "tape": "^4.6.0",
     "tape-run": "^2.1.4",
     "virtual-dom": "^2.1.1"
+  },
+  "dependencies": {
+    "kefir": "^3.5.1"
   }
 }
