@@ -4,5 +4,6 @@ module.exports = {
     select: require('./kwark-dom-select'),
     effects: require('./kwark-dom-effects'),
     ajax: require('./kwark-async-ajax'),
-    component: require('./kwark-ui-component')
-}
+    component: require('./kwark-ui-component'),
+    state: require('./kwark-ui-state')
+};

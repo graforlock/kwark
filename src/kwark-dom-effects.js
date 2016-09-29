@@ -9,11 +9,11 @@ function effects(selector) {
 }
 
 effects.prototype = Object.create(select.prototype);
-effects.prototype.name = select;
+effects.prototype.constructor = effects;
 
 select.statics_decorator(effects);
 
-effects.prototype.frame_decorator = function() {}
+effects.prototype.frame_decorator = function() {};
 
 effects.prototype.fadeIn = function(target) {
     target = target || 1.0;

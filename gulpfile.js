@@ -9,7 +9,8 @@ var deps = {
                 select: './src/kwark-dom-select.js',
                 effects: './src/kwark-dom-effects.js',
                 ajax: './src/kwark-async-ajax.js',
-                component: './src/kwark-ui-component.js'
+                component: './src/kwark-ui-component.js',
+                state : './src/kwark-ui-state.js'
         }
 };
 
