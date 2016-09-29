@@ -25,4 +25,4 @@ test('Ajax and functional compososition test.', function(t) {
     result = ajax('get', {url: 'http://jsonplaceholder.typicode.com/posts/1'})
         .then(composed);
 
-})
+});

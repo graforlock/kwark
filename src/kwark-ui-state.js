@@ -5,15 +5,15 @@ function State(state) {
     if(this instanceof State) {
         //-> stateProvider is a simplified Subject of Observer :
         this.state = state;
-        this.stream$ = kefir.pool();
+        this._stream$ = kefir.pool();
         this.initState = state;
         this.subscribers = [];
 
         this.subscribe(function(state) {
-            var stream$ = kefir.stream(function(emitter) {
-                return emitter.emit(state)
-            });
-            this.stream$.plug(stream$);
+            this._stream$.plug(
+                kefir.stream(function(emitter) {
+                    return emitter.emit(state)
+                }));
         }.bind(this));
 
         this.updateState = function(newState) {
@@ -43,8 +43,8 @@ State.prototype.subscribe = function(subscriber) {
     this.subscribers.push(subscriber);
 };
 
-State.prototype.getStream = function() {
-  return this.stream$;
+State.prototype.stream = function() {
+  return this._stream$;
 };
 
 State.prototype.resetState = function() {
@@ -53,7 +53,7 @@ State.prototype.resetState = function() {
 
 State.prototype.bindState = function(components) {
     for(var i = 0; i < components.length; i++) {
-        components[i].subscribe(this.stream$);
+        components[i].subscribe(this._stream$);
     }
 };
 

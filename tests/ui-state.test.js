@@ -13,7 +13,7 @@ test('State stores properties', function(t) {
             return state;
         });
 
-    comp.subscribe(fakeState.getStream());
+    comp.subscribe(fakeState.stream());
 
     fakeState.updateState({ active: true });
 
