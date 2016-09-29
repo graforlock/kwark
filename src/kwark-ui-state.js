@@ -25,6 +25,8 @@ function State(state) {
             }
         }.bind(this);
 
+        this.notify();
+        
     } else {
         return new State(state);
     }

@@ -4,20 +4,24 @@ var component = require('../src/kwark-ui-component'),
 
 
 test('State stores properties', function(t) {
-    t.plan(1);
+    t.plan(2);
 
-    var fakeState = new State({ active: false });
+    var fakeState = new State({ active: false }),
+        emittedState = null;
 
     component.inline("<div id=the-div ></div>").nodeify();
     var comp = new component("#the-div", function(state) {
             return state;
         });
 
-    comp.subscribe(fakeState.stream());
+    fakeState.stream().onValue(function(value) {
+        emittedState = value;
+    });
 
-    fakeState.updateState({ active: true });
+    fakeState.updateState({active: !fakeState.state.active});
 
     t.equals(fakeState.state.active, true);
+    t.notEqual(emittedState, null);
     t.end();
 
 });
