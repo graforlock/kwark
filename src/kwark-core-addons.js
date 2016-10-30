@@ -40,12 +40,9 @@ var addons = {
     },
     xmlToJson: function (xml)
     {
-        // Create the return object
         var obj = {};
-
         if (xml.nodeType == 1)
-        { // element
-            // do attributes
+        {
             if (xml.attributes.length > 0)
             {
                 obj["@attributes"] = {};
@@ -56,11 +53,10 @@ var addons = {
                 }
             }
         } else if (xml.nodeType == 3)
-        { // text
+        {
             obj = xml.nodeValue;
         }
 
-        // do children
         if (xml.hasChildNodes())
         {
             for (var i = 0; i < xml.childNodes.length; i++)
