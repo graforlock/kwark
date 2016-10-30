@@ -104,6 +104,6 @@ var addons = {
         script.src = source;
     }
 
-}
+};
 
 module.exports = addons;
