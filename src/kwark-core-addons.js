@@ -6,14 +6,14 @@ var addons = {
             if (typeof form == 'object' && form.nodeName == "FORM")
             {
                 var len = form.elements.length;
-                for (i = 0; i < len; i++)
+                for (var i = 0; i < len; i++)
                 {
                     field = form.elements[i];
                     if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button')
                     {
                         if (field.type == 'select-multiple')
                         {
-                            for (j = form.elements[i].options.length - 1; j >= 0; j--)
+                            for (var j = form.elements[i].options.length - 1; j >= 0; j--)
                             {
                                 if (field.options[j].selected)
                                     s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[j].value);
