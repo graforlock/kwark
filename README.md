@@ -3,7 +3,40 @@
 
 A minimalistic selector library. **NO** external dependencies.
 
-### insertBefore( targetNode )
+### kwark(simpleQuery) 
+
+Executes a simple, unified query for DOM methods: ```getElementById```, ```getElementsByClassName``` and ```getElementsByTagName```.
+
+```javascript
+
+kwark('#my-app-id')
+    .click(function(e) { /* ... */});
+kwark('.navbar')
+    .each(function(el, id) { /* ... */});
+kwark('input')
+    .last();
+
+```
+
+### kwark.one(anyQuery)
+
+Selects first dom node that matches the query. Equates to ```querySelector```. Can be also used as ```kwark.query()```.
+
+```javascript
+kwark.one('.nav-item')
+    .hasClass('.active');
+```
+
+### kwark.queryAll(anyQuery)
+
+Selects all dom nodes that match the query. Equates to ```querySelectorAll```.
+
+```javascript
+kwark.queryAll('.nav-item')
+    .each(function(e) { /* ... */});
+```
+
+### kwark.insertBefore( targetNode )
 
 Insert `select`ed node before the element passed in as an argument.
 
@@ -15,7 +48,7 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
-### insertAfter( targetNode )
+### kwark.insertAfter( targetNode )
 
 Insert `select`ed node after the element passed in as an argument.
 

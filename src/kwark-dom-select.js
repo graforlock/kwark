@@ -249,7 +249,7 @@ kwark.prototype.event = function (ev, f)
     }
 };
 
-kwark.prototype.event_decorator = function (eventName)
+kwark.prototype.eventDecorator = function (eventName)
 {
     return function (f)
     {
@@ -267,14 +267,12 @@ kwark.prototype.event_decorator = function (eventName)
 
 for (var i = 0; i < events.length; i++)
 {
-    kwark.prototype[events[i]] = kwark.prototype.event_decorator(events[i]);
+    kwark.prototype[events[i]] = kwark.prototype.eventDecorator(events[i]);
 }
 
 kwark.prototype.foreach = function (list, f)
 {
-    for (var i = 0; i < list.length && !f(list[i], i++);)
-    {
-    }
+    for (var i = 0; i < list.length && !f(list[i], i++);) {}
 };
 
 kwark.prototype.type = function (node)
