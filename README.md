@@ -38,7 +38,7 @@ kwark.queryAll('.nav-item a')
     .each(function(e) { /* ... */});
 ```
 
-### kwark.find( anyQuery, [ all ] )
+### selected.find( anyQuery, [ all ] )
 
 Finds an element inside the given node. Optional argument is a boolean that if set true, returns many occurences.
 
@@ -47,7 +47,7 @@ someNode.find('a')
     .each(function(e) { /* ... */});
 ```
 
-### kwark.insertBefore( targetNode )
+### selected.insertBefore( targetNode )
 
 Insert `select`ed node before the element passed in as an argument.
 
@@ -59,7 +59,7 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
-### kwark.insertAfter( targetNode )
+### selected.insertAfter( targetNode )
 
 Insert `select`ed node after the element passed in as an argument.
 
@@ -98,7 +98,7 @@ partialAddThree(1)(2)(3);
 // 6
 ```
 
-### compose( ...functions )
+### utils.compose( ...functions )
 
 Functional composition utility (reversed pipeline).
 
@@ -112,7 +112,7 @@ kwark.ajax('get' url)
 ```
 
 
-### contains( item, array )
+### utils.contains( item, array )
 
 Checks whether array contains the given item.
 
@@ -121,11 +121,11 @@ kwark.contains(1,[1,2,3]);
 // true
 ```
 
-### extend( destination, source )
+### utils.extend( destination, source )
 
 Extends javascript object(s). With ES2015 in mind, rather use native `Object.assign()` method, or spread operator `{ ...object}`.
 
-### nSiblings( targetNode )
+### utils.nSiblings( targetNode )
 
 All siblings following the target node.
 
@@ -133,7 +133,7 @@ All siblings following the target node.
 kwark.nSiblings(document.querySelector('#nodey'));
 ```
 
-### pSiblings( targetNode )
+### utils.pSiblings( targetNode )
 
 All siblings preceding the target node.
 
@@ -142,7 +142,7 @@ kwark.pSiblings(document.querySelector('#nodey'));
 ```
 ## kwark:dom:addons
 
-### serialize( targetNode )
+### addons.serialize( targetNode )
 
 Serializes form node which is then ready to be sent as a request.
 
@@ -151,7 +151,7 @@ var formNode = select('#form').node,
     serialized = addons.serialize(formNode);
 ```
 
-### xmlToJson( XML )
+### addons.xmlToJson( XML )
 
 Parses xml file and returns a valid JSON object out of it.
 
@@ -162,7 +162,7 @@ var JSON = addons.xmlToJson(xmlresponse);
 
 ```
 
-### loadScript( urlSource, [ callback ] )
+### addons.loadScript( urlSource, [ callback ] )
 
 Fetches and loads the script from external url. The script itself is cleaned up from DOM after being loaded.
 
@@ -174,7 +174,7 @@ addons.loadScript('https://somefancyfancysite.co.uk/script.js');
 
 A simple promise-based implementation of ajax module.  
 
-### ajax( method, url ).then( resolve, reject )
+### ajax.ajax( method, url ).then( resolve, reject )
 
 Generalised ajax method, supports basic GET and POST requests. Where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely. Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
 
