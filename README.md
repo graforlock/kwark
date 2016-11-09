@@ -26,10 +26,6 @@ div
     .insertAfter(document.querySelector('#nodey'));
 ```
 
-## kwark:dom:effects
-
-Pre-build effects and animations that extend the standard select library.
-
 ## kwark:core:utils
 
 Utilities, and standalone functions that make the core of kwark.
