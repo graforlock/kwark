@@ -1,7 +1,8 @@
-## `kwark:dom:select`
 [![bitHound Overall Score](https://www.bithound.io/github/graforlock/kwark/badges/score.svg)](https://www.bithound.io/github/graforlock/kwark) [![bitHound Dependencies](https://www.bithound.io/github/graforlock/kwark/badges/dependencies.svg)](https://www.bithound.io/github/graforlock/kwark/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/graforlock/kwark/badges/devDependencies.svg)](https://www.bithound.io/github/graforlock/kwark/master/dependencies/npm) [![bitHound Code](https://www.bithound.io/github/graforlock/kwark/badges/code.svg)](https://www.bithound.io/github/graforlock/kwark)
 
 A minimalistic selector library. **NO** external dependencies.
+
+## `kwark:dom:select`
 
 ### kwark(simpleQuery) 
 
