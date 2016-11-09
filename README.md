@@ -11,8 +11,10 @@ Executes a simple, unified query for DOM methods: ```getElementById```, ```getEl
 
 kwark('#my-app-id')
     .click(function(e) { /* ... */});
+    
 kwark('.navbar')
     .each(function(el, id) { /* ... */});
+
 kwark('input')
     .last();
 
@@ -23,7 +25,7 @@ kwark('input')
 Selects first dom node that matches the query. Equates to ```querySelector```. Can be also used as ```kwark.query()```.
 
 ```javascript
-kwark.one('.nav-item')
+kwark.one('.nav-item a')
     .hasClass('.active');
 ```
 
@@ -32,7 +34,16 @@ kwark.one('.nav-item')
 Selects all dom nodes that match the query. Equates to ```querySelectorAll```.
 
 ```javascript
-kwark.queryAll('.nav-item')
+kwark.queryAll('.nav-item a')
+    .each(function(e) { /* ... */});
+```
+
+### kwark.find( anyQuery, [ all ] )
+
+Finds an element inside the given node. Optional argument is a boolean that if set true, returns many occurences.
+
+```javascript
+someNode.find('a')
     .each(function(e) { /* ... */});
 ```
 
