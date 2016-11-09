@@ -29,6 +29,8 @@ select.one = function (selector)
     return _s;
 };
 
+select.querySelector = select.one;
+
 select.inline = function (content)
 {
     var _i = new select();
