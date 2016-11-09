@@ -95,6 +95,6 @@ var core = {
         while (n = n.previousElementSibling) siblings.push(n);
         return siblings;
     }
-}
+};
 
 module.exports = core;

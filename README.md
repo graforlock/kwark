@@ -38,6 +38,14 @@ kwark.queryAll('.nav-item a')
     .each(function(e) { /* ... */});
 ```
 
+### selected.append( [ parentNode ])
+
+Prepends the node after all nodes in the specified parent node. If no argument given, it will put it as a last node in the ```document.body```.
+
+```javascript
+someNode.append(otherNode.node);
+```
+
 ### selected.children( [ filter ] )
 
 Select all children with the optional ability to filter them out.
@@ -49,6 +57,18 @@ var filtered = someNode.children(function(e) { /* filter by some criteria*/})
 ### selected.eq(index)
 
 Returns the node at the index of the given selection.
+
+### selected.exists()
+
+Existence check on the node, checks against ```null``` and ```undefined```;
+
+### selected.clone( otherNode )
+
+Extends/clones a node along with the current context.
+
+### selected.event( eventName,  callback )
+
+Manually specify event and callback. Useful for custom DOM events.
 
 ### selected.find( anyQuery, [ all ] )
 
@@ -62,6 +82,10 @@ someNode.find('a', true)
 ### selected.first()
 
 Returns the first node from selection.
+
+### selected.html( rawHtml )
+
+Inline raw html into the node.
 
 ### selected.insertAfter( targetNode )
 
@@ -86,6 +110,14 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
+### selected.interval( callback, time, [ infinite ])
+
+Interval will either initialise a timeout or interval on the given node context. Depends on the last argument (boolean).
+
+```javascript
+const div = selectedNode.interval(function(e) { /* ... */}, 100, true);
+```
+
 ### selected.last()
 
 Returns the last node from selection.
@@ -97,6 +129,18 @@ Select all siblings (left and right) with the optional ability to filter them ou
 ```javascript
 var filtered = someNode.siblings(function(e) { /* filter by some criteria*/})
 ```
+
+### selected.prepend( [ parentNode ])
+
+Prepends the node before all nodes in the specified parent node. If no argument given, it will put it as a first node in the ```document.body```.
+
+```javascript
+someNode.prepend(otherNode.node);
+```
+
+### selected.type( [ otherNode ] )
+
+Check the type of the node. Optional argument changes context to another node.
 
 ## kwark:core:utils
 

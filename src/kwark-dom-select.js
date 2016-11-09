@@ -231,16 +231,17 @@ kwark.prototype.prepend = function (target)
     return this;
 };
 
-kwark.prototype.isntNull = function ()
+kwark.prototype.exists = function ()
 {
     return this.node.constructor.name !== 'none';
 };
+
 
 kwark.prototype.event = function (ev, f)
 {
     f = f.bind(this);
     var cachedProp = this.node;
-    if (this.isntNull() && cachedProp.length !== 0)
+    if (this.exists() && cachedProp.length !== 0)
     {
         this.each(function (e)
         {
@@ -255,7 +256,7 @@ kwark.prototype.eventDecorator = function (eventName)
     {
         f = f.bind(this);
         var cachedProp = this.node;
-        if (this.isntNull() && cachedProp.length !== 0)
+        if (this.exists() && cachedProp.length !== 0)
         {
             this.each(function (e)
             {
