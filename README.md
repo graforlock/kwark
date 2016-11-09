@@ -74,7 +74,7 @@ div
 
 Utilities, and standalone functions that make the core of kwark.
 
-### partial( fn, [ ...arguments ])
+### utils.partial( fn, [ ...arguments ])
 
 Partial application. Function will fire as soon as it gets enough arguments.
 
