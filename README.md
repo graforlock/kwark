@@ -9,13 +9,13 @@ Executes a simple, unified query for DOM methods: ```getElementById```, ```getEl
 
 ```javascript
 
-kwark('#my-app-id')
+var A = kwark('#my-app-id')
     .click(function(e) { /* ... */});
     
-kwark('.navbar')
+var B = kwark('.navbar')
     .each(function(el, id) { /* ... */});
 
-kwark('input')
+var C = kwark('input')
     .last();
 
 ```
@@ -38,6 +38,18 @@ kwark.queryAll('.nav-item a')
     .each(function(e) { /* ... */});
 ```
 
+### selected.children( [ filter ] )
+
+Select all children with the optional ability to filter them out.
+
+```javascript
+var filtered = someNode.children(function(e) { /* filter by some criteria*/})
+```
+
+### selected.eq(index)
+
+Returns the node at the index of the given selection.
+
 ### selected.find( anyQuery, [ all ] )
 
 Finds an element inside the given node. Optional argument is a boolean that if set true, returns many occurences.
@@ -45,6 +57,21 @@ Finds an element inside the given node. Optional argument is a boolean that if s
 ```javascript
 someNode.find('a')
     .each(function(e) { /* ... */});
+```
+
+### selected.first()
+
+Returns the first node from selection.
+
+### selected.insertAfter( targetNode )
+
+Insert `select`ed node after the element passed in as an argument.
+
+
+```javascript
+div
+    .clone()
+    .insertAfter(document.querySelector('#nodey'));
 ```
 
 ### selected.insertBefore( targetNode )
@@ -59,15 +86,16 @@ div
     .insertBefore(document.querySelector('#nodey'));
 ```
 
-### selected.insertAfter( targetNode )
+### selected.last()
 
-Insert `select`ed node after the element passed in as an argument.
+Returns the last node from selection.
 
+### selected.siblings( [ filter ] )
+
+Select all siblings (left and right) with the optional ability to filter them out.
 
 ```javascript
-div
-    .clone()
-    .insertAfter(document.querySelector('#nodey'));
+var filtered = someNode.siblings(function(e) { /* filter by some criteria*/})
 ```
 
 ## kwark:core:utils
@@ -104,10 +132,10 @@ Functional composition utility (reversed pipeline).
 
 
 ```javascript
-var filteredData = kwark
+var filteredData = utils
     .compose(filterById, parseJson);
 
-kwark.ajax('get' url)
+ajax.ajax('get' url)
     .then(filteredData);
 ```
 
@@ -117,7 +145,7 @@ kwark.ajax('get' url)
 Checks whether array contains the given item.
 
 ```javascript
-kwark.contains(1,[1,2,3]);
+utils.contains(1,[1,2,3]);
 // true
 ```
 
@@ -130,7 +158,7 @@ Extends javascript object(s). With ES2015 in mind, rather use native `Object.ass
 All siblings following the target node.
 
 ```javascript
-kwark.nSiblings(document.querySelector('#nodey'));
+utils.nSiblings(document.querySelector('#nodey'));
 ```
 
 ### utils.pSiblings( targetNode )
@@ -138,7 +166,7 @@ kwark.nSiblings(document.querySelector('#nodey'));
 All siblings preceding the target node.
 
 ```javascript
-kwark.pSiblings(document.querySelector('#nodey'));
+utils.pSiblings(document.querySelector('#nodey'));
 ```
 ## kwark:dom:addons
 
@@ -179,6 +207,6 @@ A simple promise-based implementation of ajax module.
 Generalised ajax method, supports basic GET and POST requests. Where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely. Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
 
 ```javascript
-kwark.ajax('get', url)
+ajax.ajax('get', url)
     .then(resolve, reject);
 ```
