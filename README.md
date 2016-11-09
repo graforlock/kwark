@@ -2,7 +2,7 @@
 
 A minimalistic selector library. **NO** external dependencies.
 
-## `kwark:dom:select`
+## [`kwark:dom:select`]()
 
 ### `kwark(simpleQuery)`
 
@@ -147,7 +147,7 @@ someNode.prepend(otherNode.node);
 
 Check the type of the node. Optional argument changes context to another node.
 
-## `kwark:core:utils`
+## [`kwark:core:utils`]()
 
 Utilities, and standalone functions that make the core of kwark.
 
@@ -215,7 +215,7 @@ All siblings preceding the target node.
 ```javascript
 utils.pSiblings(document.querySelector('#nodey'));
 ```
-## `kwark:dom:addons`
+## [`kwark:dom:addons`]()
 
 ### `addons.serialize( targetNode )`
 
@@ -245,7 +245,7 @@ Fetches and loads the script from external url. The script itself is cleaned up 
 addons.loadScript('https://somefancyfancysite.co.uk/script.js');
 ```
 
-## `kwark:async:ajax`
+## [`kwark:async:ajax`]()
 
 A simple promise-based implementation of ajax module.  
 
