@@ -1,59 +1,71 @@
 var core = require('./kwark-core-utils'),
     events = core.events;
 
-function select(selector)
+/* @Input */
+function kwark(selector)
 {
-    if (this instanceof select)
+    if (this instanceof kwark)
     {
         if (!selector) return;
+
         if (selector.indexOf('.') !== -1)
         {
-            this['node'] = document.getElementsByClassName(selector.split('.').join(''));
-        } else if (selector.indexOf('#') !== -1)
-        {
-            this['node'] = document.getElementById(selector.split('#').join(''));
-        } else
-        {
-            this['node'] = document.getElementsByTagName(selector);
+            this.node = document.getElementsByClassName(selector.split('.').join(''));
         }
-    } else
+        else if (selector.indexOf('#') !== -1)
+        {
+            this.node = document.getElementById(selector.split('#').join(''));
+        }
+        else
+        {
+            this.node = document.getElementsByTagName(selector);
+        }
+    }
+    else
     {
-        return new select(selector);
+        return new kwark(selector);
     }
 }
 
-select.one = function (selector)
+/* @Decorators */
+kwark.classMethodDecorator = function (method)
 {
-    var _s = new select();
-    _s.node = document.querySelector(selector);
-    return _s;
+    return function (textContent)
+    {
+        var _s = new kwark();
+        _s.node = method ? method(textContent) : textContent;
+        return _s;
+    }
 };
 
-select.querySelector = select.one;
-
-select.inline = function (content)
+kwark.staticsDecorator = function (target)
 {
-    var _i = new select();
+    for (var i = 0; i < core.statics.length; i++)
+    {
+        target[core.statics[i]] = kwark[core.statics[i]];
+    }
+};
+
+/* @Class Methods */
+kwark.one = kwark.classMethodDecorator(document.querySelector);
+
+kwark.query = kwark.one;
+/* Aliased .one for convenience */
+
+kwark.queryAll = kwark.classMethodDecorator(document.querySelectorAll);
+
+kwark.get = kwark.classMethodDecorator();
+
+kwark.inline = function (content)
+{
+    var _i = new kwark();
     _i.inlined = content;
     return _i;
 };
 
-select.get = function (content)
-{
-    var _i = new select();
-    _i.node = content;
-    return _i;
-};
 
-select.statics_decorator = function (target)
-{
-    for (var i = 0; i < core.statics.length; i++)
-    {
-        target[core.statics[i]] = select[core.statics[i]];
-    }
-};
-
-select.prototype = {
+/* @Getter/Setter */
+kwark.prototype = {
     set node(v)
     {
         this._ = new core.maybe(v);
@@ -64,15 +76,16 @@ select.prototype = {
     }
 };
 
-select.prototype.find = function (selector, all)
+/* @Instance Methods */
+kwark.prototype.find = function (selector, all)
 {
     var selected = all ? this.node.querySelectorAll(selector) : this.node.querySelector(selector);
     if (selected) this.node = selected;
-    else console.log('select: ' + selector + ' is empty.');
+    else console.log('kwark: ' + selector + ' is empty.');
     return this;
 };
 
-select.prototype.addClass = function (className)
+kwark.prototype.addClass = function (className)
 {
     if (this.node.className.indexOf(className) === -1)
     {
@@ -81,20 +94,20 @@ select.prototype.addClass = function (className)
     return this;
 };
 
-select.prototype.hasClass = function (className)
+kwark.prototype.hasClass = function (className)
 {
     if (new RegExp(className, 'g').exec(this.node.className)) return this;
     return false;
 };
 
-select.prototype.removeClass = function (className)
+kwark.prototype.removeClass = function (className)
 {
     if (this.hasClass(className)) this.node.className = this.node.className.replace(className, '');
     return this;
 };
 
 
-select.prototype.nodeify = function (target)
+kwark.prototype.nodeify = function (target)
 {
     var reg = /^<([\w =\-'"\[\]0-9]+)>([<>\w\D ]*)<\/[a-z]+>$/g,
         node = reg.exec(this.inlined);
@@ -131,7 +144,7 @@ select.prototype.nodeify = function (target)
     return this;
 };
 
-select.prototype.clone = function ()
+kwark.prototype.clone = function ()
 {
     var cloned = this.node.cloneNode(true),
         newObj = core.extend({}, this);
@@ -139,7 +152,7 @@ select.prototype.clone = function ()
     return newObj;
 };
 
-select.prototype.siblings = function (filter)
+kwark.prototype.siblings = function (filter)
 {
     var prev = core.pSiblings(this.node) || [],
         next = core.nSiblings(this.node) || [];
@@ -147,28 +160,28 @@ select.prototype.siblings = function (filter)
     return this;
 };
 
-select.prototype.eq = function (index)
+kwark.prototype.eq = function (index)
 {
     return this.node[index];
 };
 
-select.prototype.first = function ()
+kwark.prototype.first = function ()
 {
     return this.node[0];
 };
 
-select.prototype.last = function ()
+kwark.prototype.last = function ()
 {
     return this.node[this.node.length - 1];
 };
 
-select.prototype.where = function (filter)
+kwark.prototype.where = function (filter)
 {
     this.node = [].filter.call(this.node, filter);
     return this;
 };
 
-select.prototype.children = function (filter)
+kwark.prototype.children = function (filter)
 {
     if (!filter)
     {
@@ -180,14 +193,14 @@ select.prototype.children = function (filter)
     return this;
 };
 
-select.prototype.append = function (target)
+kwark.prototype.append = function (target)
 {
     target = target || document.body;
     target.appendChild(this.node);
     return this;
 };
 
-select.prototype.insertBefore = function (target)
+kwark.prototype.insertBefore = function (target)
 {
     target = target || false;
     if (target)
@@ -199,7 +212,7 @@ select.prototype.insertBefore = function (target)
 
 };
 
-select.prototype.insertAfter = function (target)
+kwark.prototype.insertAfter = function (target)
 {
     target = target.nextElementSibling || false;
     if (target)
@@ -210,7 +223,7 @@ select.prototype.insertAfter = function (target)
     return this;
 };
 
-select.prototype.prepend = function (target)
+kwark.prototype.prepend = function (target)
 {
     target = target || document.body;
     if (target.children) target.insertBefore(this.node, target.children[0]);
@@ -218,12 +231,12 @@ select.prototype.prepend = function (target)
     return this;
 };
 
-select.prototype.isntNull = function ()
+kwark.prototype.isntNull = function ()
 {
-    return this['node'].constructor.name !== 'none';
+    return this.node.constructor.name !== 'none';
 };
 
-select.prototype.event = function (ev, f)
+kwark.prototype.event = function (ev, f)
 {
     f = f.bind(this);
     var cachedProp = this.node;
@@ -236,7 +249,7 @@ select.prototype.event = function (ev, f)
     }
 };
 
-select.prototype.event_decorator = function (eventName)
+kwark.prototype.event_decorator = function (eventName)
 {
     return function (f)
     {
@@ -254,35 +267,35 @@ select.prototype.event_decorator = function (eventName)
 
 for (var i = 0; i < events.length; i++)
 {
-    select.prototype[events[i]] = select.prototype.event_decorator(events[i]);
+    kwark.prototype[events[i]] = kwark.prototype.event_decorator(events[i]);
 }
 
-select.prototype.foreach = function (list, f)
+kwark.prototype.foreach = function (list, f)
 {
     for (var i = 0; i < list.length && !f(list[i], i++);)
     {
     }
 };
 
-select.prototype.type = function (node)
+kwark.prototype.type = function (node)
 {
     return node ? {}.toString.call(node) : {}.toString.call(this.node);
 };
-select.prototype.each = function (f)
+kwark.prototype.each = function (f)
 {
     var type = {}.toString;
     if (this.type() === '[object HTMLCollection]' || this.type() === '[object NodeList]' || this.type() === '[object Array]')
     {
-        this.foreach(this['node'], f);
+        this.foreach(this.node, f);
         return this;
     } else
     {
-        f(this['node']);
+        f(this.node);
         return this;
     }
 };
 
-select.prototype.html = function (html)
+kwark.prototype.html = function (html)
 {
     if (!html) return this.node.innerHTML;
     this.each(function (e)
@@ -292,11 +305,11 @@ select.prototype.html = function (html)
     return this;
 };
 
-select.prototype.interval = function (f, time, infinite)
+kwark.prototype.interval = function (f, time, infinite)
 {
     f = f.bind(this);
     var interval = (infinite || false) ? setInterval : setTimeout;
     interval(f, time);
 };
 
-module.exports = select;
+module.exports = kwark;

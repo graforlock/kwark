@@ -2,7 +2,7 @@ var select = require('../src/kwark-dom-select'),
     effects = require('../src/kwark-dom-select'),
     test = require('tape');
 
-test('Siblings, insertAfter, select.type() functiionality.', function(t) {
+test('Siblings, insertAfter, kwark.type() functiionality.', function(t) {
     t.plan(2);
     
     var len = 4,

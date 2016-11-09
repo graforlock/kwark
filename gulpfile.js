@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 var deps = {
         src : {
                 core: './src/kwark-core.js',
-                select: './src/kwark-dom-select.js',
+                select: './src/kwark-dom-kwark.js',
                 ajax: './src/kwark-async-ajax.js',
                 component: './src/kwark-ui-component.js'
         }
