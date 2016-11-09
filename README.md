@@ -82,6 +82,10 @@ Returns the first node from selection.
 
 Inline raw html into the node.
 
+### selected.inline( stringText )
+
+Stores string representation of DOM without parsing. See ```.nodeify()```.
+
 ### selected.insertAfter( targetNode )
 
 Insert `select`ed node after the element passed in as an argument.
@@ -113,6 +117,14 @@ const div = selectedNode.interval(function(e) { /* ... */}, 100, true);
 ### selected.last()
 
 Returns the last node from selection.
+
+### selected.nodeify( target )
+
+Parses strings and creates valid DOM out of given target.
+ 
+ ```javascript
+ selectedNode.inline('<div id="sample-id"><p>Heyhoue</p></div>').nodeify();
+ ```
 
 ### selected.siblings( [ filter ] )
 
