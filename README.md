@@ -9,14 +9,11 @@ Executes a simple, unified query for DOM methods: ```getElementById```, ```getEl
 
 ```javascript
 
-var A = kwark('#my-app-id')
-    .click(function(e) { /* ... */});
+var A = kwark('#my-app-id').click(function(e) { /* ... */});
     
-var B = kwark('.navbar')
-    .each(function(el, id) { /* ... */});
+var B = kwark('.navbar').each(function(el, id) { /* ... */});
 
-var C = kwark('input')
-    .last();
+var C = kwark('input').last();
 
 ```
 
@@ -25,8 +22,7 @@ var C = kwark('input')
 Selects first dom node that matches the query. Equates to ```querySelector```. Can be also used as ```kwark.query()```.
 
 ```javascript
-kwark.one('.nav-item a')
-    .hasClass('.active');
+kwark.one('.nav-item a').hasClass('.active');
 ```
 
 ### kwark.queryAll(anyQuery)
@@ -34,8 +30,7 @@ kwark.one('.nav-item a')
 Selects all dom nodes that match the query. Equates to ```querySelectorAll```.
 
 ```javascript
-kwark.queryAll('.nav-item a')
-    .each(function(e) { /* ... */});
+kwark.queryAll('.nav-item a').each(function(e) { /* ... */});
 ```
 
 ### selected.append( [ parentNode ])
@@ -93,9 +88,7 @@ Insert `select`ed node after the element passed in as an argument.
 
 
 ```javascript
-div
-    .clone()
-    .insertAfter(document.querySelector('#nodey'));
+div.clone().insertAfter(document.querySelector('#nodey'));
 ```
 
 ### selected.insertBefore( targetNode )
@@ -106,8 +99,7 @@ Insert `select`ed node before the element passed in as an argument.
 ```javascript
 const div = select.inline('<div><p>contents</p></div>').nodeify();
 
-div
-    .insertBefore(document.querySelector('#nodey'));
+div.insertBefore(document.querySelector('#nodey'));
 ```
 
 ### selected.interval( callback, time, [ infinite ])
@@ -176,11 +168,9 @@ Functional composition utility (reversed pipeline).
 
 
 ```javascript
-var filteredData = utils
-    .compose(filterById, parseJson);
+var filteredData = utils.compose(filterById, parseJson);
 
-ajax.ajax('get' url)
-    .then(filteredData);
+ajax.ajax('get' url).then(filteredData);
 ```
 
 
@@ -251,6 +241,5 @@ A simple promise-based implementation of ajax module.
 Generalised ajax method, supports basic GET and POST requests. Where `resolve` and `reject` are functions that take one single argument `response`, and `error`, respectiely. Ajax module does not support chaining multiple `.then` sequences. There is some debate whether it is a better approach than the regular "callback hell". Use functional composition (`kwark.compose`) instead, it improves the design of your app.
 
 ```javascript
-ajax.ajax('get', url)
-    .then(resolve, reject);
+ajax.ajax('get', url).then(resolve, reject);
 ```
