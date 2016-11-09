@@ -55,7 +55,7 @@ Returns the node at the index of the given selection.
 Finds an element inside the given node. Optional argument is a boolean that if set true, returns many occurences.
 
 ```javascript
-someNode.find('a')
+someNode.find('a', true)
     .each(function(e) { /* ... */});
 ```
 
