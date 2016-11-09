@@ -33,6 +33,10 @@ Selects all dom nodes that match the query. Equates to ```querySelectorAll```.
 kwark.queryAll('.nav-item a').each(function(e) { /* ... */});
 ```
 
+### kwark.inline( stringText )
+
+Stores string representation of DOM without parsing. See ```.nodeify()```.
+
 ### selected.append( [ parentNode ])
 
 Prepends the node after all nodes in the specified parent node. If no argument given, it will put it as a last node in the ```document.body```.
@@ -81,10 +85,6 @@ Returns the first node from selection.
 ### selected.html( rawHtml )
 
 Inline raw html into the node.
-
-### selected.inline( stringText )
-
-Stores string representation of DOM without parsing. See ```.nodeify()```.
 
 ### selected.insertAfter( targetNode )
 
