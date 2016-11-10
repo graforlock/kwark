@@ -30,7 +30,6 @@ function ajax(method, options)
                 return;
             }
 
-            var handler;
             if (status >= 200)
             {
                 if (status >= 300)

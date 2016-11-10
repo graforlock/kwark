@@ -57,9 +57,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {
 	    core: __webpack_require__(1),
 	    addons: __webpack_require__(2),
-	    option: __webpack_require__(3),
-	    select: __webpack_require__(4),
-	    ajax: __webpack_require__(5)
+	    select: __webpack_require__(3),
+	    ajax: __webpack_require__(4)
 	};
 
 
@@ -197,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    field = form.elements[i];
 	                    if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button')
 	                    {
-	                        if (field.type == 'kwark-multiple')
+	                        if (field.type == 'select-multiple')
 	                        {
 	                            for (var j = form.elements[i].options.length - 1; j >= 0; j--)
 	                            {
@@ -294,117 +293,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = addons;
 
+
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var exists = __webpack_require__(1).exists;
-	
-	/* @Option Type:
-	*
-	*  May or may not return a value, but never fails.
-	*  Option is null safe, will never crash your app
-	*  unless you explicitly specify so by unwrapping
-	*  the null value.
-	*
-	* */
-	function Option(v)
-	{
-	    return exists(v) ? Just.of(v) : None.of(v);
-	}
-	
-	Option.of = function(v)
-	{
-	  return new Option(v);
-	};
-	
-	
-	Option.prototype.map = function(f)
-	{
-	    return this.isNone() ? None.of(null) : Just.of(f(this.__value));
-	};
-	
-	Option.prototype.isNone = function()
-	{
-	    return this.constructor === None;
-	};
-	
-	Option.prototype.orElse = function(other)
-	{
-	    return this.isNone() ? Option.of(other.unwrap()) : Option.of(this.unwrap());
-	};
-	
-	Option.prototype.empty = function()
-	{
-	    return None.of(null);
-	};
-	
-	Option.prototype.unwrap = function()
-	{
-	  return this.__value;
-	};
-	
-	Option.prototype.concat = function(other, f)
-	{
-	    return this.isNone() ? None.of(null) : f(this.unwrap(), other.unwrap());
-	};
-	
-	function Just(v)
-	{
-	    this.__value = v;
-	}
-	
-	Just.prototype = Object.create(Option.prototype);
-	Just.prototype.constructor = Just;
-	
-	Just.prototype.map = function(f)
-	{
-	    return new Just(f(this.__value));
-	};
-	
-	
-	Just.of = function(v) {
-	    return new Just(v);
-	};
-	
-	function None(v)
-	{
-	    this.__value = v;
-	}
-	
-	None.prototype = Object.create(Option.prototype);
-	None.prototype.constructor = None;
-	
-	None.prototype.map = function()
-	{
-	    return new None(null);
-	};
-	
-	None.of = function(v) {
-	    return new None(v);
-	};
-	
-	module.exports = Option;
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var core = __webpack_require__(1),
 	    events = core.events;
 	
 	/* @Kwark
-	*
-	*  Input type for selector.
-	*
-	* */
+	 *
+	 *  Input type for selector.
+	 *
+	 * */
 	function kwark(selector)
 	{
 	    if (this instanceof kwark)
 	    {
 	        if (!selector) return this;
 	
-	        this.node = document.querySelector(selector);
+	        if (typeof selector !== 'string')
+	        {
+	            return this.node = null;
+	        }
+	
+	        if (document.querySelector)
+	        {
+	            this.node = document.querySelector(selector);
+	        }
+	        else
+	        {
+	            kwark.simple(selector);
+	        }
 	    }
 	    else
 	    {
@@ -418,7 +338,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return function (textContent)
 	    {
 	        var _s = new kwark();
-	        console.log(method);
 	        _s.node = method ? method(textContent) : textContent;
 	        return _s;
 	    }
@@ -433,7 +352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	
 	/* @Class Methods */
-	kwark.simple = function(simple)
+	kwark.simple = function (simple)
 	{
 	    var _s = new kwark();
 	    if (simple.indexOf('.') !== -1)
@@ -448,13 +367,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    {
 	        _s.node = document.getElementsByTagName(simple);
 	    }
-	
 	    return _s;
 	};
 	
-	kwark.one = kwark.classMethodDecorator(function(selector) { return document.querySelector(selector); });
+	kwark.one = kwark.classMethodDecorator(function (selector)
+	{
+	    return document.querySelector(selector);
+	});
 	kwark.query = kwark.one;
-	kwark.queryAll = kwark.classMethodDecorator(function(selector) { return document.querySelectorAll(selector); });
+	kwark.queryAll = kwark.classMethodDecorator(function (selector)
+	{
+	    return document.querySelectorAll(selector);
+	});
 	kwark.get = kwark.classMethodDecorator();
 	
 	kwark.inline = function (content)
@@ -633,7 +557,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	kwark.prototype.exists = function ()
 	{
-	    return this.node.constructor.name !== 'none';
+	    return this._.constructor.name !== 'none';
 	};
 	
 	
@@ -673,7 +597,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	kwark.prototype.foreach = function (list, f)
 	{
-	    for (var i = 0; i < list.length && !f(list[i], i++);) {}
+	    for (var i = 0; i < list.length && !f(list[i], i++);)
+	    {
+	    }
 	};
 	
 	kwark.prototype.type = function (node)
@@ -682,7 +608,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	kwark.prototype.each = function (f)
 	{
-	    var type = {}.toString;
 	    if (this.type() === '[object HTMLCollection]' || this.type() === '[object NodeList]' || this.type() === '[object Array]')
 	    {
 	        this.foreach(this.node, f);
@@ -714,7 +639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = kwark;
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var serialize = __webpack_require__(2).serialize.object;
@@ -749,7 +674,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return;
 	            }
 	
-	            var handler;
 	            if (status >= 200)
 	            {
 	                if (status >= 300)

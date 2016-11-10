@@ -308,7 +308,6 @@ kwark.prototype.type = function (node)
 };
 kwark.prototype.each = function (f)
 {
-    var type = {}.toString;
     if (this.type() === '[object HTMLCollection]' || this.type() === '[object NodeList]' || this.type() === '[object Array]')
     {
         this.foreach(this.node, f);
