@@ -11,7 +11,7 @@ var addons = {
                     field = form.elements[i];
                     if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button')
                     {
-                        if (field.type == 'kwark-multiple')
+                        if (field.type == 'select-multiple')
                         {
                             for (var j = form.elements[i].options.length - 1; j >= 0; j--)
                             {
