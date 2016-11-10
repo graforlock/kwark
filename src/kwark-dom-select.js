@@ -2,17 +2,29 @@ var core = require('./kwark-core-utils'),
     events = core.events;
 
 /* @Kwark
-*
-*  Input type for selector.
-*
-* */
+ *
+ *  Input type for selector.
+ *
+ * */
 function kwark(selector)
 {
     if (this instanceof kwark)
     {
         if (!selector) return this;
 
-        this.node = document.querySelector(selector);
+        if (typeof selector !== 'string')
+        {
+            return this.node = null;
+        }
+
+        if (document.querySelector)
+        {
+            this.node = document.querySelector(selector);
+        }
+        else
+        {
+            kwark.simple(selector);
+        }
     }
     else
     {
@@ -26,7 +38,6 @@ kwark.classMethodDecorator = function (method)
     return function (textContent)
     {
         var _s = new kwark();
-        console.log(method);
         _s.node = method ? method(textContent) : textContent;
         return _s;
     }
@@ -41,7 +52,7 @@ kwark.staticsDecorator = function (target)
 };
 
 /* @Class Methods */
-kwark.simple = function(simple)
+kwark.simple = function (simple)
 {
     var _s = new kwark();
     if (simple.indexOf('.') !== -1)
@@ -56,13 +67,18 @@ kwark.simple = function(simple)
     {
         _s.node = document.getElementsByTagName(simple);
     }
-
     return _s;
 };
 
-kwark.one = kwark.classMethodDecorator(function(selector) { return document.querySelector(selector); });
+kwark.one = kwark.classMethodDecorator(function (selector)
+{
+    return document.querySelector(selector);
+});
 kwark.query = kwark.one;
-kwark.queryAll = kwark.classMethodDecorator(function(selector) { return document.querySelectorAll(selector); });
+kwark.queryAll = kwark.classMethodDecorator(function (selector)
+{
+    return document.querySelectorAll(selector);
+});
 kwark.get = kwark.classMethodDecorator();
 
 kwark.inline = function (content)
@@ -241,7 +257,7 @@ kwark.prototype.prepend = function (target)
 
 kwark.prototype.exists = function ()
 {
-    return this.node.constructor.name !== 'none';
+    return this._.constructor.name !== 'none';
 };
 
 
@@ -281,7 +297,9 @@ for (var i = 0; i < events.length; i++)
 
 kwark.prototype.foreach = function (list, f)
 {
-    for (var i = 0; i < list.length && !f(list[i], i++);) {}
+    for (var i = 0; i < list.length && !f(list[i], i++);)
+    {
+    }
 };
 
 kwark.prototype.type = function (node)

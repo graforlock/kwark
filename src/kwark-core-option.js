@@ -1,4 +1,4 @@
-var exists = require('./utils').exists;
+var exists = require('./kwark-core-utils').exists;
 
 /* @Option Type:
 *
