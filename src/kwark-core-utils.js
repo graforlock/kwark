@@ -1,7 +1,7 @@
 var core = {
     maybe: function (v)
     {
-        if (v === null || typeof v === 'undefined' || !isNaN(v)) return new core.none(v);
+        if (!core.exists(v)) return new core.none(v);
         return new core.just(v);
     },
     just: function (v)
@@ -31,6 +31,10 @@ var core = {
     {
         for (var i = 0; i < array.length; i++) if (item === array[i]) return true;
         return false;
+    },
+    exists: function (v)
+    {
+        return v !== null && typeof v !== 'undefined' && v === v;
     },
     extend: function (destination, source)
     {
@@ -69,6 +73,14 @@ var core = {
         var siblings = [], n = target;
         while (n = n.nextElementSibling) siblings.push(n);
         return siblings;
+    },
+    Null: function (x)
+    {
+        var nullable = x ? x : core.exists;
+        return function(v)
+        {
+            return typeof nullable === 'function' ? nullable(v) : v !== nullable;
+        }
     },
     partial: function (fn)
     {

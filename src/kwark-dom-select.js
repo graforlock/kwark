@@ -1,25 +1,18 @@
 var core = require('./kwark-core-utils'),
     events = core.events;
 
-/* @Input */
+/* @Kwark
+*
+*  Input type for selector.
+*
+* */
 function kwark(selector)
 {
     if (this instanceof kwark)
     {
-        if (!selector) return;
+        if (!selector) return this;
 
-        if (selector.indexOf('.') !== -1)
-        {
-            this.node = document.getElementsByClassName(selector.split('.').join(''));
-        }
-        else if (selector.indexOf('#') !== -1)
-        {
-            this.node = document.getElementById(selector.split('#').join(''));
-        }
-        else
-        {
-            this.node = document.getElementsByTagName(selector);
-        }
+        this.node = document.querySelector(selector);
     }
     else
     {
@@ -47,13 +40,28 @@ kwark.staticsDecorator = function (target)
 };
 
 /* @Class Methods */
+kwark.simple = function(simple)
+{
+    var _s = new kwark();
+    if (simple.indexOf('.') !== -1)
+    {
+        _s.node = document.getElementsByClassName(simple.split('.').join(''));
+    }
+    else if (simple.indexOf('#') !== -1)
+    {
+        _s.node = document.getElementById(simple.split('#').join(''));
+    }
+    else
+    {
+        _s.node = document.getElementsByTagName(simple);
+    }
+
+    return _s.node;
+};
+
 kwark.one = kwark.classMethodDecorator(document.querySelector);
-
 kwark.query = kwark.one;
-/* Aliased .one for convenience */
-
 kwark.queryAll = kwark.classMethodDecorator(document.querySelectorAll);
-
 kwark.get = kwark.classMethodDecorator();
 
 kwark.inline = function (content)
@@ -62,7 +70,6 @@ kwark.inline = function (content)
     _i.inlined = content;
     return _i;
 };
-
 
 /* @Getter/Setter */
 kwark.prototype = {

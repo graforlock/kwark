@@ -1,5 +1,13 @@
-//var exists = require('./utils').exists;
+var exists = require('./utils').exists;
 
+/* @Option Type:
+*
+*  May or may not return a value, but never fails.
+*  Option is null safe, will never crash your app
+*  unless you explicitly specify so by unwrapping
+*  the null value.
+*
+* */
 function Option(v)
 {
     return exists(v) ? Just.of(v) : None.of(v);
@@ -49,6 +57,12 @@ function Just(v)
 Just.prototype = Object.create(Option.prototype);
 Just.prototype.constructor = Just;
 
+Just.prototype.map = function(f)
+{
+    return new Just(f(this.__value));
+};
+
+
 Just.of = function(v) {
     return new Just(v);
 };
@@ -61,6 +75,13 @@ function None(v)
 None.prototype = Object.create(Option.prototype);
 None.prototype.constructor = None;
 
+None.prototype.map = function()
+{
+    return new None(null);
+};
+
 None.of = function(v) {
     return new None(v);
 };
+
+module.exports = Option;
