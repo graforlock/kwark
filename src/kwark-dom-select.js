@@ -1,24 +1,29 @@
 var core = require('./kwark-core-utils'),
     events = core.events;
 
-/* @Input */
+/* @Kwark
+ *
+ *  Input type for selector.
+ *
+ * */
 function kwark(selector)
 {
     if (this instanceof kwark)
     {
-        if (!selector) return;
+        if (!selector) return this;
 
-        if (selector.indexOf('.') !== -1)
+        if (typeof selector !== 'string')
         {
-            this.node = document.getElementsByClassName(selector.split('.').join(''));
+            return this.node = null;
         }
-        else if (selector.indexOf('#') !== -1)
+
+        if (document.querySelector)
         {
-            this.node = document.getElementById(selector.split('#').join(''));
+            this.node = document.querySelector(selector);
         }
         else
         {
-            this.node = document.getElementsByTagName(selector);
+            kwark.simple(selector);
         }
     }
     else
@@ -47,13 +52,33 @@ kwark.staticsDecorator = function (target)
 };
 
 /* @Class Methods */
-kwark.one = kwark.classMethodDecorator(document.querySelector);
+kwark.simple = function (simple)
+{
+    var _s = new kwark();
+    if (simple.indexOf('.') !== -1)
+    {
+        _s.node = document.getElementsByClassName(simple.split('.').join(''));
+    }
+    else if (simple.indexOf('#') !== -1)
+    {
+        _s.node = document.getElementById(simple.split('#').join(''));
+    }
+    else
+    {
+        _s.node = document.getElementsByTagName(simple);
+    }
+    return _s;
+};
 
+kwark.one = kwark.classMethodDecorator(function (selector)
+{
+    return document.querySelector(selector);
+});
 kwark.query = kwark.one;
-/* Aliased .one for convenience */
-
-kwark.queryAll = kwark.classMethodDecorator(document.querySelectorAll);
-
+kwark.queryAll = kwark.classMethodDecorator(function (selector)
+{
+    return document.querySelectorAll(selector);
+});
 kwark.get = kwark.classMethodDecorator();
 
 kwark.inline = function (content)
@@ -62,7 +87,6 @@ kwark.inline = function (content)
     _i.inlined = content;
     return _i;
 };
-
 
 /* @Getter/Setter */
 kwark.prototype = {
@@ -233,7 +257,7 @@ kwark.prototype.prepend = function (target)
 
 kwark.prototype.exists = function ()
 {
-    return this.node.constructor.name !== 'none';
+    return this._.constructor.name !== 'none';
 };
 
 
@@ -273,7 +297,9 @@ for (var i = 0; i < events.length; i++)
 
 kwark.prototype.foreach = function (list, f)
 {
-    for (var i = 0; i < list.length && !f(list[i], i++);) {}
+    for (var i = 0; i < list.length && !f(list[i], i++);)
+    {
+    }
 };
 
 kwark.prototype.type = function (node)
