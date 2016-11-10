@@ -38,6 +38,8 @@ kwark.queryAll('.nav-item a').each(function(e) { /* ... */});
 
 Stores string representation of DOM without parsing. See ```.nodeify()```.
 
+- - -
+
 ### `selected.append( [ parentNode ])`
 
 Prepends the node after all nodes in the specified parent node. If no argument given, it will put it as a last node in the ```document.body```.
