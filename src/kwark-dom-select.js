@@ -26,6 +26,7 @@ kwark.classMethodDecorator = function (method)
     return function (textContent)
     {
         var _s = new kwark();
+        console.log(method);
         _s.node = method ? method(textContent) : textContent;
         return _s;
     }
@@ -56,12 +57,12 @@ kwark.simple = function(simple)
         _s.node = document.getElementsByTagName(simple);
     }
 
-    return _s.node;
+    return _s;
 };
 
-kwark.one = kwark.classMethodDecorator(document.querySelector);
+kwark.one = kwark.classMethodDecorator(function(selector) { return document.querySelector(selector); });
 kwark.query = kwark.one;
-kwark.queryAll = kwark.classMethodDecorator(document.querySelectorAll);
+kwark.queryAll = kwark.classMethodDecorator(function(selector) { return document.querySelectorAll(selector); });
 kwark.get = kwark.classMethodDecorator();
 
 kwark.inline = function (content)
