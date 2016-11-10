@@ -1,0 +1,3 @@
+- [ ] Optional module (to replace rudimentary maybe in core utils).
+- [ ] Replace ```get``` and ```set``` as they are not too browser friendly.
+- [ ] Write all Tape test suites (100% coverage)
